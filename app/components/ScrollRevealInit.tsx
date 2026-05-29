@@ -9,9 +9,15 @@ export function ScrollRevealInit() {
     let raf1: number, raf2: number, fallback: ReturnType<typeof setTimeout>
     let io: IntersectionObserver | null = null
 
+    const observe = () => {
+      document.querySelectorAll<HTMLElement>(".av-fade").forEach((el) => {
+        if (!io) return
+        io.observe(el)
+      })
+    }
+
     raf1 = requestAnimationFrame(() => {
       raf2 = requestAnimationFrame(() => {
-        const els = [...document.querySelectorAll<HTMLElement>(".av-fade")]
         io = new IntersectionObserver(
           (entries) =>
             entries.forEach((e) => {
@@ -22,10 +28,11 @@ export function ScrollRevealInit() {
             }),
           { threshold: 0.12 }
         )
-        els.forEach((el) => io!.observe(el))
+        observe()
 
+        // fallback re-queries DOM — łapie elementy dodane przez Suspense po montażu
         fallback = setTimeout(() => {
-          els.forEach((el) => {
+          document.querySelectorAll<HTMLElement>(".av-fade").forEach((el) => {
             el.classList.add("av-in")
             el.style.transition = "none"
             el.style.opacity = "1"
