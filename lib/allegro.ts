@@ -1,5 +1,5 @@
 import { cacheLife, cacheTag } from 'next/cache'
-import { supabaseAdmin } from './supabase-server'
+import { getSupabaseAdmin } from './supabase-server'
 
 const API      = 'https://api.allegro.pl'
 const AUTH_URL = 'https://allegro.pl/auth/oauth/token'
@@ -16,11 +16,11 @@ let tokenState: {
 
 async function loadRefreshToken(): Promise<string> {
   // Próbuj Supabase najpierw — przeżywa restarty serwera
-  const { data } = await supabaseAdmin
-    .from('kv_store')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { data } = await (getSupabaseAdmin().from('kv_store') as any)
     .select('value')
     .eq('key', KV_KEY)
-    .single()
+    .single() as { data: { value: string } | null }
 
   if (data?.value) return data.value
 
@@ -31,7 +31,8 @@ async function loadRefreshToken(): Promise<string> {
 }
 
 async function saveRefreshToken(token: string): Promise<void> {
-  const { error } = await supabaseAdmin.from('kv_store').upsert({
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const { error } = await (getSupabaseAdmin().from('kv_store') as any).upsert({
     key: KV_KEY,
     value: token,
     updated_at: new Date().toISOString(),
