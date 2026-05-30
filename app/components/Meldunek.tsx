@@ -42,7 +42,7 @@ export function Meldunek() {
             margin: "18px 0 46px",
           }}
         >
-          Szukasz czegoś konkretnego? Interesuje cię niedostępny już przedmiot — opisz go, a sprawdzimy w magazynie.
+          Szukasz czegoś konkretnego? Interesuje cię niedostępny już przedmiot?
           Chcesz sprzedać przedmiot z kolekcji? Napisz — odpiszemy każdemu.
         </p>
 

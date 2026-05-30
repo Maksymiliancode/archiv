@@ -4,15 +4,19 @@ import { getSupabaseAdmin } from './supabase-server'
 const API      = 'https://api.allegro.pl'
 const AUTH_URL = 'https://allegro.pl/auth/oauth/token'
 const ACCEPT   = 'application/vnd.allegro.public.v1+json'
-const KV_KEY   = 'allegro_refresh_token'
+// Osobny klucz dla dev i prod — żeby lokalne env nie inwalidowało produkcyjnego tokenu
+const KV_KEY   = process.env.NODE_ENV === 'production'
+  ? 'allegro_refresh_token'
+  : 'allegro_refresh_token_dev'
 
-// In-memory token state — przeżywa między cache miss'ami.
-// Trwałe źródło prawdy: Supabase kv_store (fallback: .env.local ALLEGRO_REFRESH_TOKEN).
 let tokenState: {
   accessToken: string
   refreshToken: string
   accessExpiresAt: number
 } | null = null
+
+// Mutex — jedno odświeżenie tokenu na raz, żeby uniknąć race condition
+let refreshingPromise: Promise<string> | null = null
 
 async function loadRefreshToken(): Promise<string> {
   // Próbuj Supabase najpierw — przeżywa restarty serwera
@@ -40,19 +44,18 @@ async function saveRefreshToken(token: string): Promise<void> {
   if (error) console.error('[Allegro] saveRefreshToken failed:', error.message)
 }
 
-async function getAccessToken(): Promise<string> {
-  const now = Date.now()
+async function clearSupabaseToken(): Promise<void> {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    await (getSupabaseAdmin().from('kv_store') as any).delete().eq('key', KV_KEY)
+  } catch {}
+}
 
-  if (tokenState && tokenState.accessExpiresAt > now + 120_000) {
-    return tokenState.accessToken
-  }
-
-  const refreshToken = tokenState?.refreshToken ?? await loadRefreshToken()
-
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+async function tryRefresh(refreshToken: string): Promise<Record<string, any> | null> {
   const credentials = Buffer.from(
     `${process.env.ALLEGRO_CLIENT_ID}:${process.env.ALLEGRO_CLIENT_SECRET}`
   ).toString('base64')
-
   const res = await fetch(AUTH_URL, {
     method: 'POST',
     headers: {
@@ -61,25 +64,47 @@ async function getAccessToken(): Promise<string> {
     },
     body: `grant_type=refresh_token&refresh_token=${encodeURIComponent(refreshToken)}`,
   })
+  if (!res.ok) return null
+  return res.json()
+}
 
-  if (!res.ok) {
-    const body = await res.text()
-    throw new Error(`Allegro token refresh failed: ${res.status} — ${body}`)
+async function doRefresh(): Promise<string> {
+  const now = Date.now()
+  const currentToken = tokenState?.refreshToken ?? await loadRefreshToken()
+  let data = await tryRefresh(currentToken)
+
+  if (!data) {
+    // Token z Supabase nieważny — usuń go i spróbuj env var jako fallback
+    console.warn('[Allegro] token nieważny, próbuję env var jako fallback')
+    await clearSupabaseToken()
+    tokenState = null
+    const envToken = process.env.ALLEGRO_REFRESH_TOKEN
+    if (envToken && envToken !== currentToken) {
+      data = await tryRefresh(envToken)
+    }
   }
 
-  const data = await res.json()
-  const newRefreshToken = data.refresh_token ?? refreshToken
+  if (!data) {
+    throw new Error('Wszystkie tokeny Allegro nieważne — uruchom: node scripts/allegro-auth.mjs')
+  }
 
+  const newRefreshToken = data.refresh_token ?? currentToken
   tokenState = {
     accessToken:     data.access_token,
     refreshToken:    newRefreshToken,
     accessExpiresAt: now + (data.expires_in ?? 43_200) * 1000,
   }
 
-  // Zapisz rotowany token — przeżyje restart serwera
   await saveRefreshToken(newRefreshToken)
-
   return tokenState.accessToken
+}
+
+async function getAccessToken(): Promise<string> {
+  const now = Date.now()
+  if (tokenState && tokenState.accessExpiresAt > now + 120_000) return tokenState.accessToken
+  if (refreshingPromise) return refreshingPromise
+  refreshingPromise = doRefresh().finally(() => { refreshingPromise = null })
+  return refreshingPromise
 }
 
 function slugify(text: string): string {
@@ -102,6 +127,18 @@ function timeLabel(endingAt: string | null): { text: string; urgent: boolean } {
   return { text: `kończy się za ${d} dni`, urgent: d <= 3 }
 }
 
+// Elastyczny parser — łapie 0/30, [0/30], (0/30) gdziekolwiek w tytule
+const DESANT_RE = /[\[\(]?(\d{1,2})\/30[\]\)]?/
+
+function parseDesantCrate(title: string): number | null {
+  const m = DESANT_RE.exec(title)
+  return m ? parseInt(m[1], 10) : null
+}
+
+function stripDesantTag(title: string): string {
+  return title.replace(/\s*[\[\(]?\d{1,2}\/30[\]\)]?\s*/g, '').trim()
+}
+
 export type AllegroOffer = {
   id: string
   title: string
@@ -111,6 +148,8 @@ export type AllegroOffer = {
   imageUrl: string | null
   offerUrl: string
   format: 'BUY_NOW' | 'AUCTION' | 'ADVERTISEMENT' | null
+  desantCrate?: number
+  sold?: boolean
 }
 
 export type AllegroResult = {
@@ -140,25 +179,77 @@ export async function getActiveOffers(limit = 1000): Promise<AllegroResult> {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mapped: AllegroOffer[] = offers.map((o: any) => {
+      const crate  = parseDesantCrate(o.name)
       const amount = o.sellingMode?.price?.amount ?? o.sellingMode?.startingPrice?.amount
       const price  = amount ? `${Number(amount).toFixed(0)} zł` : '—'
       const { text: timeText, urgent } = timeLabel(o.publication?.endingAt ?? null)
+      const cleanTitle = crate !== null ? stripDesantTag(o.name) : o.name
 
       return {
         id:       o.id,
-        title:    o.name,
+        title:    cleanTitle,
         price,
         timeText,
         urgent,
         imageUrl: o.primaryImage?.url ?? null,
-        offerUrl: `https://allegro.pl/oferta/${slugify(o.name)}-${o.id}`,
+        offerUrl: `https://allegro.pl/oferta/${slugify(cleanTitle)}-${o.id}`,
         format:   o.sellingMode?.format ?? null,
+        ...(crate !== null && { desantCrate: crate }),
       }
     })
 
     return { offers: mapped, totalCount: totalCount ?? mapped.length }
   } catch (err) {
     console.error('[Allegro] getActiveOffers error:', err)
+    return { offers: [], totalCount: 0 }
+  }
+}
+
+export async function getEndedDesantOffers(): Promise<AllegroResult> {
+  'use cache'
+  cacheLife('hours')
+  cacheTag('allegro-ended-desant')
+
+  try {
+    const token = await getAccessToken()
+
+    const res = await fetch(
+      `${API}/sale/offers?publication.status=ENDED&limit=1000&sort=-endingAt`,
+      { headers: { Authorization: `Bearer ${token}`, Accept: ACCEPT } }
+    )
+
+    if (!res.ok) {
+      console.error('[Allegro] ended offers fetch failed:', res.status, await res.text())
+      return { offers: [], totalCount: 0 }
+    }
+
+    const { offers = [] } = await res.json()
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const mapped = offers.reduce((acc: AllegroOffer[], o: any) => {
+      const crate = parseDesantCrate(o.name)
+      if (crate === null) return acc
+      const amount   = o.sellingMode?.price?.amount ?? o.sellingMode?.startingPrice?.amount
+      const price    = amount ? `${Number(amount).toFixed(0)} zł` : '—'
+      const cleanTitle = stripDesantTag(o.name)
+      acc.push({
+        id:          o.id,
+        title:       cleanTitle,
+        price,
+        timeText:    'zakończona',
+        urgent:      false,
+        imageUrl:    o.primaryImage?.url ?? null,
+        offerUrl:    `https://allegro.pl/oferta/${slugify(cleanTitle)}-${o.id}`,
+        format:      o.sellingMode?.format ?? null,
+        desantCrate: crate,
+        sold:        true,
+      })
+      return acc
+    }, [])
+
+    return { offers: mapped, totalCount: mapped.length }
+  } catch (err) {
+    console.error('[Allegro] getEndedDesantOffers error:', err)
     return { offers: [], totalCount: 0 }
   }
 }

@@ -14,8 +14,9 @@ interface AuctionsProps {
 
 export async function Auctions({ allegroUrl }: AuctionsProps) {
   const { offers, totalCount } = await getActiveOffers()
-  const lots = offers.length > 0 ? offers : FALLBACK_LOTS
-  const count = offers.length > 0 ? totalCount : 0
+  const regular = offers.filter((o) => o.desantCrate === undefined)
+  const lots = regular.length > 0 ? regular : FALLBACK_LOTS
+  const count = regular.length > 0 ? totalCount : 0
 
   return (
     <section id="aukcje" className="av-section av-section-dark av-grain av-grain-dark">
@@ -34,7 +35,7 @@ export async function Auctions({ allegroUrl }: AuctionsProps) {
             <div className="av-eyebrow" style={{ color: "var(--gold)" }}>
               MANIFEST ŁADUNKU · SYGN. AS–2026
             </div>
-            <h2 className="av-sechead">TERAZ NA ALLEGRO</h2>
+            <h2 className="av-sechead">DODATKOWO NA ALLEGRO</h2>
           </div>
           <div className="av-stencil">
             {lots.length > 0 ? `POZ. 1–${lots.length}` : "POZ. —"}

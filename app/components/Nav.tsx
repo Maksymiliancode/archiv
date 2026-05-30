@@ -7,6 +7,7 @@ export function Nav() {
       </a>
       <div className="av-nav-menu">
         <a href="/#desant">DESANT</a>
+        <a href="/desant">ARCHIWUM</a>
         <a href="/o-nas">O NAS</a>
         <a href="/#meldunek">KONTAKT</a>
         <a href="/#newsletter">SYGNAŁ</a>

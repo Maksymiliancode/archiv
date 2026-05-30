@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   title: "ARCHIV — Army Shop Bielsko-Biała",
   description:
     "Prawie trzydzieści lat kolekcjonowania. Militaria, noże, demobil, sprzęt survivalowy. Nowy rozdział Army Shop Bielsko-Biała.",
+  icons: {
+    icon: "/army-shop-logo.png",
+  },
 }
 
 const jsonLd = {
