@@ -4,65 +4,60 @@ import { getSupabaseAdmin } from './supabase-server'
 const API      = 'https://api.allegro.pl'
 const AUTH_URL = 'https://allegro.pl/auth/oauth/token'
 const ACCEPT   = 'application/vnd.allegro.public.v1+json'
-// Osobny klucz dla dev i prod — żeby lokalne env nie inwalidowało produkcyjnego tokenu
-const KV_KEY   = process.env.NODE_ENV === 'production'
-  ? 'allegro_refresh_token'
-  : 'allegro_refresh_token_dev'
+const sfx    = process.env.NODE_ENV === 'production' ? '' : '_dev'
+const KV_RT  = `allegro_refresh_token${sfx}`   // refresh token (plain string, backward compat)
+const KV_AT  = `allegro_token_cache${sfx}`     // pełny cache: access + refresh + expiry (JSON)
 
-let tokenState: {
-  accessToken: string
-  refreshToken: string
-  accessExpiresAt: number
-} | null = null
+interface TokenCache { accessToken: string; refreshToken: string; expiresAt: number }
 
-// Mutex — jedno odświeżenie tokenu na raz, żeby uniknąć race condition
-let refreshingPromise: Promise<string> | null = null
+let mem: TokenCache | null = null          // in-memory (ta sama instancja serverless)
+let refreshingPromise: Promise<string> | null = null  // mutex
 
-async function loadRefreshToken(): Promise<string> {
-  // Próbuj Supabase najpierw — przeżywa restarty serwera
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data } = await (getSupabaseAdmin().from('kv_store') as any)
-    .select('value')
-    .eq('key', KV_KEY)
-    .single() as { data: { value: string } | null }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const kv = () => getSupabaseAdmin().from('kv_store') as any
 
-  if (data?.value) return data.value
-
-  // Fallback na .env.local (pierwsze uruchomienie)
-  const envToken = process.env.ALLEGRO_REFRESH_TOKEN
-  if (!envToken) throw new Error('Brak ALLEGRO_REFRESH_TOKEN w .env.local i Supabase')
-  return envToken
-}
-
-async function saveRefreshToken(token: string): Promise<void> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { error } = await (getSupabaseAdmin().from('kv_store') as any).upsert({
-    key: KV_KEY,
-    value: token,
-    updated_at: new Date().toISOString(),
-  })
-  if (error) console.error('[Allegro] saveRefreshToken failed:', error.message)
-}
-
-async function clearSupabaseToken(): Promise<void> {
+async function readCache(): Promise<TokenCache | null> {
   try {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    await (getSupabaseAdmin().from('kv_store') as any).delete().eq('key', KV_KEY)
+    const { data } = await kv().select('value').eq('key', KV_AT).single()
+    if (data?.value) return JSON.parse(data.value) as TokenCache
   } catch {}
+  return null
+}
+
+async function writeCache(c: TokenCache): Promise<void> {
+  try {
+    const now = new Date().toISOString()
+    await Promise.all([
+      kv().upsert({ key: KV_AT,  value: JSON.stringify(c), updated_at: now }),
+      kv().upsert({ key: KV_RT,  value: c.refreshToken,    updated_at: now }),
+    ])
+  } catch (e) { console.error('[Allegro] writeCache failed:', e) }
+}
+
+async function clearCache(): Promise<void> {
+  try { await Promise.all([kv().delete().eq('key', KV_AT), kv().delete().eq('key', KV_RT)]) } catch {}
+}
+
+async function getStoredRefreshToken(): Promise<string> {
+  // Najpierw nowy format (JSON cache)
+  const c = await readCache()
+  if (c?.refreshToken) return c.refreshToken
+  // Legacy: plain string
+  const { data } = await kv().select('value').eq('key', KV_RT).single()
+  if (data?.value) return data.value
+  // Fallback: env var
+  const env = process.env.ALLEGRO_REFRESH_TOKEN
+  if (!env) throw new Error('Brak ALLEGRO_REFRESH_TOKEN')
+  return env
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-async function tryRefresh(refreshToken: string): Promise<Record<string, any> | null> {
-  const credentials = Buffer.from(
-    `${process.env.ALLEGRO_CLIENT_ID}:${process.env.ALLEGRO_CLIENT_SECRET}`
-  ).toString('base64')
+async function tryRefresh(rt: string): Promise<Record<string, any> | null> {
+  const creds = Buffer.from(`${process.env.ALLEGRO_CLIENT_ID}:${process.env.ALLEGRO_CLIENT_SECRET}`).toString('base64')
   const res = await fetch(AUTH_URL, {
     method: 'POST',
-    headers: {
-      Authorization: `Basic ${credentials}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `grant_type=refresh_token&refresh_token=${encodeURIComponent(refreshToken)}`,
+    headers: { Authorization: `Basic ${creds}`, 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: `grant_type=refresh_token&refresh_token=${encodeURIComponent(rt)}`,
   })
   if (!res.ok) return null
   return res.json()
@@ -70,38 +65,51 @@ async function tryRefresh(refreshToken: string): Promise<Record<string, any> | n
 
 async function doRefresh(): Promise<string> {
   const now = Date.now()
-  const currentToken = tokenState?.refreshToken ?? await loadRefreshToken()
-  let data = await tryRefresh(currentToken)
+  const currentRT = mem?.refreshToken ?? await getStoredRefreshToken()
+  let data = await tryRefresh(currentRT)
 
   if (!data) {
-    // Token z Supabase nieważny — usuń go i spróbuj env var jako fallback
-    console.warn('[Allegro] token nieważny, próbuję env var jako fallback')
-    await clearSupabaseToken()
-    tokenState = null
-    const envToken = process.env.ALLEGRO_REFRESH_TOKEN
-    if (envToken && envToken !== currentToken) {
-      data = await tryRefresh(envToken)
+    // Refresh token już rotowany przez inną instancję serverless — poczekaj 2s i spróbuj odczytać świeży cache
+    await new Promise(r => setTimeout(r, 2000))
+    const fresh = await readCache()
+    if (fresh && fresh.expiresAt > Date.now() + 120_000) {
+      mem = fresh
+      return mem.accessToken
     }
+    // Ostatnia deska: env var
+    console.warn('[Allegro] Supabase token nieważny, próbuję env var')
+    await clearCache()
+    mem = null
+    const env = process.env.ALLEGRO_REFRESH_TOKEN
+    if (env && env !== currentRT) data = await tryRefresh(env)
   }
 
-  if (!data) {
-    throw new Error('Wszystkie tokeny Allegro nieważne — uruchom: node scripts/allegro-auth.mjs')
-  }
+  if (!data) throw new Error('Wszystkie tokeny Allegro nieważne — uruchom: node scripts/allegro-auth.mjs')
 
-  const newRefreshToken = data.refresh_token ?? currentToken
-  tokenState = {
-    accessToken:     data.access_token,
-    refreshToken:    newRefreshToken,
-    accessExpiresAt: now + (data.expires_in ?? 43_200) * 1000,
+  const cache: TokenCache = {
+    accessToken:  data.access_token,
+    refreshToken: data.refresh_token ?? currentRT,
+    expiresAt:    now + (data.expires_in ?? 43_200) * 1000,
   }
-
-  await saveRefreshToken(newRefreshToken)
-  return tokenState.accessToken
+  mem = cache
+  await writeCache(cache)
+  return cache.accessToken
 }
 
 async function getAccessToken(): Promise<string> {
   const now = Date.now()
-  if (tokenState && tokenState.accessExpiresAt > now + 120_000) return tokenState.accessToken
+
+  // 1. Pamięć tej samej instancji serverless
+  if (mem && mem.expiresAt > now + 120_000) return mem.accessToken
+
+  // 2. Supabase cache — najważniejsze: raz na 12h, nie przy każdym żądaniu
+  const cached = await readCache()
+  if (cached && cached.expiresAt > now + 120_000) {
+    mem = cached
+    return mem.accessToken
+  }
+
+  // 3. Refresh — mutex zapobiega równoległym odświeżeniom w tej samej instancji
   if (refreshingPromise) return refreshingPromise
   refreshingPromise = doRefresh().finally(() => { refreshingPromise = null })
   return refreshingPromise
