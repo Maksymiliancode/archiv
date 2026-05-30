@@ -74,9 +74,6 @@ export const metadata: Metadata = {
       "Prawie trzydzieści lat kolekcjonowania. Militaria, noże, demobil, sprzęt survivalowy.",
     images: ["/og-archiv.png"],
   },
-  alternates: {
-    canonical: "https://archivmilitary.com",
-  },
 }
 
 const jsonLd = {
