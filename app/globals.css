@@ -471,6 +471,15 @@
   .av-cards { grid-template-columns: 1fr; }
 }
 
+/* ── O NAS — responsywność ── */
+@media (max-width: 760px) {
+  .about-intro-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .about-idea-grid  { grid-template-columns: 1fr !important; gap: 32px !important; }
+  .about-how-grid   { grid-template-columns: 1fr !important; }
+  .about-timeline   { padding-left: 28px !important; }
+  .about-timeline-dot { left: -37px !important; }
+}
+
 /* ── Duży telefon — mniejsze karty tylko w sekcji Dodatkowo na Allegro ── */
 @media (max-width: 760px) {
   #aukcje .av-card-photo { height: 140px; }
@@ -479,6 +488,11 @@
   #aukcje .av-card-price { font-size: 20px; }
   #aukcje .av-card-cta   { padding: 10px; font-size: 11px; }
   #aukcje .av-cards      { gap: 16px; }
+}
+
+/* ── Paginacja aukcji na mobile ── */
+@media (max-width: 560px) {
+  .av-btn { padding: 12px 14px; font-size: 11px; letter-spacing: 0.1em; white-space: nowrap; }
 }
 
 /* ── Mały telefon (480px) ── */

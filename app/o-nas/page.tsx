@@ -29,7 +29,7 @@ function AboutIntro() {
       style={{ paddingTop: 70, paddingBottom: 80 }}
     >
       <div
-        className="av-wrap av-fade"
+        className="av-wrap av-fade about-intro-grid"
         style={{
           position: "relative",
           zIndex: 2,
@@ -144,6 +144,7 @@ function History() {
 
         {/* Timeline */}
         <div
+          className="about-timeline"
           style={{
             display: "flex",
             flexDirection: "column",
@@ -159,6 +160,7 @@ function History() {
               style={{ position: "relative", paddingBottom: i < TIMELINE.length - 1 ? 50 : 0 }}
             >
               <span
+                className="about-timeline-dot"
                 style={{
                   position: "absolute",
                   left: -53,
@@ -219,6 +221,7 @@ function Idea() {
     <section className="av-section av-section-dark av-grain av-grain-dark">
       <div className="av-wrap av-fade" style={{ position: "relative", zIndex: 2 }}>
         <div
+          className="about-idea-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "minmax(0,0.7fr) minmax(0,1.3fr)",
@@ -324,7 +327,7 @@ function HowItWorks() {
       <div className="av-wrap av-fade" style={{ position: "relative", zIndex: 2 }}>
         <div className="av-eyebrow">ROZKAZ DZIENNY</div>
         <h2 className="av-sechead" style={{ color: "var(--ink)", marginBottom: 50 }}>CO SIĘ TU DZIEJE</h2>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
+        <div className="about-how-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 28 }}>
           {HOW.map(({ nr, head, body }) => (
             <div
               key={nr}
