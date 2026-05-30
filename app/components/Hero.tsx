@@ -32,7 +32,7 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
 
           {/* Lewa kolumna */}
           <div className="av-fade">
-            <div className="av-eyebrow">SKRZYNIA NR {String(nextCrate).padStart(2, "0")} — OTWARTA PO 29 LATACH</div>
+            <div className="av-eyebrow">SKRZYNIA NR {String(nextCrate).padStart(2, "0")} — OTWARTA PO 30 LATACH</div>
             <h1 className="av-sechead" style={{ fontSize: "clamp(56px,9vw,128px)", lineHeight: 0.9 }}>
               NOWY<br />ROZDZIAŁ.
             </h1>
