@@ -1,16 +1,23 @@
-import { getActiveOffers } from "@/lib/allegro"
+import { getActiveOffers, getEndedDesantOffers } from "@/lib/allegro"
 import { Countdown } from "./Countdown"
 import { DesantCarousel } from "./DesantCarousel"
 import { config } from "@/config/archiv"
 
 export async function DesantSection({ allegroUrl }: { allegroUrl: string }) {
-  const { offers } = await getActiveOffers()
-  const desantOffers = offers.filter((o) => o.desantCrate !== undefined)
-  const activeCrate = desantOffers.length > 0
-    ? Math.max(...desantOffers.map((o) => o.desantCrate!))
+  const [{ offers: active }, { offers: ended }] = await Promise.all([
+    getActiveOffers(),
+    getEndedDesantOffers(),
+  ])
+  const activeDesant = active.filter((o) => o.desantCrate !== undefined)
+  const activeCrate  = activeDesant.length > 0
+    ? Math.max(...activeDesant.map((o) => o.desantCrate!))
     : null
-  // Stamp pokazuje NASTĘPNY desant (crate 0 = demo, więc następny = 1)
-  const nextCrate = activeCrate !== null && activeCrate > 0 ? activeCrate + 1 : 1
+  const nextCrate    = activeCrate !== null && activeCrate > 0 ? activeCrate + 1 : 1
+
+  // Aktywne + zakończone (SOLD) z tej samej skrzyni — sortuj: aktywne pierwsze
+  const currentCrate  = activeCrate ?? 0
+  const endedCurrent  = ended.filter((o) => o.desantCrate === currentCrate)
+  const desantOffers  = [...activeDesant, ...endedCurrent]
 
   return (
     <section id="desant" className="av-section av-section-paper av-grain">

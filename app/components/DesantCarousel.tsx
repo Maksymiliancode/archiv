@@ -142,6 +142,18 @@ export function DesantCarousel({ offers, allegroUrl }: { offers: AllegroOffer[];
                 </div>
               </div>
 
+              {offer.sold && (
+                <div style={{
+                  position: "absolute", inset: 0, display: "flex", alignItems: "center",
+                  justifyContent: "center", background: "rgba(0,0,0,0.40)", zIndex: 7,
+                }}>
+                  <span style={{
+                    fontFamily: "var(--f-stamp)", fontSize: 20, letterSpacing: "0.18em",
+                    color: "var(--rust)", border: "2.5px solid var(--rust)", padding: "6px 14px",
+                    transform: "rotate(-12deg)", display: "inline-block", opacity: 0.92,
+                  }}>SPRZEDANO</span>
+                </div>
+              )}
               {offer.imageUrl ? (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -160,12 +172,19 @@ export function DesantCarousel({ offers, allegroUrl }: { offers: AllegroOffer[];
               <div className="av-card-title">{offer.title}</div>
               <div className="av-card-meta">
                 <span className="av-card-price">{offer.price}</span>
-                {offer.timeText && (
+                {offer.timeText && !offer.sold && (
                   <span className={`av-card-time${offer.urgent ? " urgent" : ""}`}>
                     {offer.timeText}
                   </span>
                 )}
               </div>
+              {offer.sold ? (
+                <div className="av-card-cta" style={{
+                  background: "rgba(139,58,42,0.25)", color: "var(--faded)",
+                  cursor: "default", display: "flex", justifyContent: "center",
+                  padding: "13px", fontFamily: "var(--f-mono)", fontSize: 12, letterSpacing: "0.2em",
+                }}>SPRZEDANO</div>
+              ) : (
               <a
                 className="av-card-cta"
                 href={offer.offerUrl || allegroUrl}
@@ -174,6 +193,7 @@ export function DesantCarousel({ offers, allegroUrl }: { offers: AllegroOffer[];
               >
                 {offer.format === "AUCTION" ? "LICYTUJ →" : "KUP TERAZ →"}
               </a>
+              )}
             </div>
           </article>
         ))}
