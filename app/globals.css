@@ -503,6 +503,16 @@ body { overflow-x: hidden; }
   p, li, h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
 }
 
+/* ── Stopka mobile ── */
+@media (max-width: 760px) {
+  .av-footer { padding: 48px 0 28px; }
+  .av-footer .footer-grid { grid-template-columns: 1fr 1fr !important; gap: 36px 24px !important; }
+  .av-footer a { white-space: normal; }
+}
+@media (max-width: 480px) {
+  .av-footer .footer-grid { grid-template-columns: 1fr !important; }
+}
+
 /* ── Mały telefon (480px) ── */
 @media (max-width: 480px) {
   .av-wrap    { padding: 0 16px; }

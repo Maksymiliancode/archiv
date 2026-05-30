@@ -6,6 +6,7 @@ export function Footer() {
       <div className="av-wrap" style={{ position: "relative", zIndex: 2 }}>
 
         <div
+          className="footer-grid"
           style={{
             display: "grid",
             gridTemplateColumns: "1fr 1fr 1fr",
