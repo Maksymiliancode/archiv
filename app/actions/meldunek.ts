@@ -83,8 +83,7 @@ export async function submitMeldunek(formData: FormData): Promise<MeldunekResult
     return { success: false, error: "Błąd zapisu. Spróbuj ponownie." }
   }
 
-  // Email do Areka — nie blokuje odpowiedzi jeśli Brevo zawiedzie
-  sendBrevoEmail({ type, description, quantity, name, email, phone, newsletter }).catch(
+  await sendBrevoEmail({ type, description, quantity, name, email, phone, newsletter }).catch(
     (e) => console.error("Brevo fetch error:", e)
   )
 
