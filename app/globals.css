@@ -471,6 +471,16 @@
   .av-cards { grid-template-columns: 1fr; }
 }
 
+/* ── Duży telefon — mniejsze karty ── */
+@media (max-width: 760px) {
+  .av-card-photo { height: 140px; }
+  .av-card-body  { padding: 12px 14px 14px; gap: 7px; }
+  .av-card-title { font-size: 16px; min-height: 0; }
+  .av-card-price { font-size: 20px; }
+  .av-card-cta   { padding: 10px; font-size: 11px; }
+  .av-cards      { gap: 16px; }
+}
+
 /* ── Mały telefon (480px) ── */
 @media (max-width: 480px) {
   .av-wrap    { padding: 0 16px; }

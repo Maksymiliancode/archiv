@@ -17,6 +17,11 @@ export function AuctionsPager({ offers, totalCount, allegroUrl }: AuctionsPagerP
   const totalPages = Math.ceil(offers.length / PAGE_SIZE)
   const visible    = offers.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
+  const goTo = (p: number) => {
+    setPage(p)
+    document.getElementById("aukcje")?.scrollIntoView({ behavior: "smooth" })
+  }
+
   const isLive = totalCount > 0
 
   return (
@@ -74,7 +79,7 @@ export function AuctionsPager({ offers, totalCount, allegroUrl }: AuctionsPagerP
           }}
         >
           <button
-            onClick={() => setPage((p) => p - 1)}
+            onClick={() => goTo(page - 1)}
             disabled={page === 0}
             className="av-btn av-btn-ghost"
             style={{ opacity: page === 0 ? 0.3 : 1, cursor: page === 0 ? "default" : "pointer", minWidth: 0, padding: "10px 20px" }}
@@ -99,7 +104,7 @@ export function AuctionsPager({ offers, totalCount, allegroUrl }: AuctionsPagerP
           </span>
 
           <button
-            onClick={() => setPage((p) => p + 1)}
+            onClick={() => goTo(page + 1)}
             disabled={page === totalPages - 1}
             className="av-btn av-btn-ghost"
             style={{ opacity: page === totalPages - 1 ? 0.3 : 1, cursor: page === totalPages - 1 ? "default" : "pointer", minWidth: 0, padding: "10px 20px" }}
