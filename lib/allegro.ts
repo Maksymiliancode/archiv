@@ -167,7 +167,7 @@ export type AllegroResult = {
 
 export async function getActiveOffers(limit = 1000): Promise<AllegroResult> {
   'use cache'
-  cacheLife('hours')
+  cacheLife({ revalidate: 300, expire: 3600 })
   cacheTag('allegro-offers')
 
   try {
@@ -215,7 +215,7 @@ export async function getActiveOffers(limit = 1000): Promise<AllegroResult> {
 
 export async function getEndedDesantOffers(): Promise<AllegroResult> {
   'use cache'
-  cacheLife('hours')
+  cacheLife({ revalidate: 300, expire: 3600 })
   cacheTag('allegro-ended-desant')
 
   try {
