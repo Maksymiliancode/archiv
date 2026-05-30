@@ -73,41 +73,37 @@ export function AuctionsPager({ offers, totalCount, allegroUrl }: AuctionsPagerP
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            gap: 24,
+            gap: 12,
             marginTop: 44,
             fontFamily: "var(--f-mono)",
+            flexWrap: "wrap",
           }}
         >
           <button
             onClick={() => goTo(page - 1)}
             disabled={page === 0}
             className="av-btn av-btn-ghost"
-            style={{ opacity: page === 0 ? 0.3 : 1, cursor: page === 0 ? "default" : "pointer", minWidth: 0, padding: "10px 20px" }}
+            style={{ opacity: page === 0 ? 0.3 : 1, cursor: page === 0 ? "default" : "pointer", minWidth: 0, padding: "10px 16px", fontSize: 13, letterSpacing: "0.1em" }}
           >
             ← POPRZEDNIA
           </button>
 
           <span
             style={{
-              fontSize: 13,
-              letterSpacing: "0.22em",
+              fontSize: 12,
+              letterSpacing: "0.18em",
               color: "var(--gold)",
               whiteSpace: "nowrap",
             }}
           >
-            STRONA {page + 1} / {totalPages}
-            {totalCount > offers.length && (
-              <span style={{ color: "var(--faded)", fontSize: 11, display: "block", textAlign: "center", marginTop: 4 }}>
-                łącznie {totalCount} aukcji
-              </span>
-            )}
+            {page + 1} / {totalPages}
           </span>
 
           <button
             onClick={() => goTo(page + 1)}
             disabled={page === totalPages - 1}
             className="av-btn av-btn-ghost"
-            style={{ opacity: page === totalPages - 1 ? 0.3 : 1, cursor: page === totalPages - 1 ? "default" : "pointer", minWidth: 0, padding: "10px 20px" }}
+            style={{ opacity: page === totalPages - 1 ? 0.3 : 1, cursor: page === totalPages - 1 ? "default" : "pointer", minWidth: 0, padding: "10px 16px", fontSize: 13, letterSpacing: "0.1em" }}
           >
             NASTĘPNA →
           </button>
