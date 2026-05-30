@@ -27,23 +27,74 @@ const crimsonText = Crimson_Text({
 })
 
 export const metadata: Metadata = {
-  title: "ARCHIV — Army Shop Bielsko-Biała",
+  metadataBase: new URL("https://archivmilitary.com"),
+  title: {
+    default: "ARCHIV — Army Shop Bielsko-Biała",
+    template: "%s — ARCHIV",
+  },
   description:
-    "Prawie trzydzieści lat kolekcjonowania. Militaria, noże, demobil, sprzęt survivalowy. Nowy rozdział Army Shop Bielsko-Biała.",
+    "Army Shop Bielsko-Biała od 1997 roku. Militaria, demobil, noże wojskowe, mundury, sprzęt survivalowy. Kolekcja Arka — comiesięczne desanty na Allegro. Skup i sprzedaż militariów.",
+  keywords: [
+    "militaria Bielsko-Biała",
+    "army shop Bielsko-Biała",
+    "sklep militarny Bielsko-Biała",
+    "demobil wojskowy sprzedaż",
+    "militaria allegro sklep",
+    "militaria II wojna światowa",
+    "noże wojskowe sklep",
+    "mundury wojskowe używane",
+    "sprzęt survivalowy wojskowy",
+    "militaria kolekcjonerskie sklep",
+    "militaria skup sprzedaż",
+    "plecak wojskowy demobil",
+    "militaria Śląsk",
+    "sklep wojskowy online",
+  ],
+  openGraph: {
+    title: "ARCHIV — Army Shop Bielsko-Biała",
+    description:
+      "Army Shop Bielsko-Biała od 1997 roku. Militaria, demobil, noże wojskowe, mundury, sprzęt survivalowy. Comiesięczne desanty na Allegro.",
+    url: "https://archivmilitary.com",
+    siteName: "ARCHIV",
+    locale: "pl_PL",
+    type: "website",
+    images: [
+      {
+        url: "/og-archiv.png",
+        width: 1200,
+        height: 630,
+        alt: "ARCHIV — Army Shop Bielsko-Biała",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "ARCHIV — Army Shop Bielsko-Biała",
+    description:
+      "Prawie trzydzieści lat kolekcjonowania. Militaria, noże, demobil, sprzęt survivalowy.",
+    images: ["/og-archiv.png"],
+  },
+  alternates: {
+    canonical: "https://archivmilitary.com",
+  },
 }
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "Store",
-  name: "Archiv",
-  founder: config.founderName,
+  "@type": "LocalBusiness",
+  name: "ARCHIV — Army Shop Bielsko-Biała",
+  description:
+    "Sklep z militariami i demobilem działający od 1997 roku. Mundury, noże wojskowe, sprzęt survivalowy, militaria II WŚ. Skup i sprzedaż. Comiesięczne desanty na Allegro.",
+  founder: { "@type": "Person", name: config.founderName },
   foundingDate: String(config.foundingYear),
   address: {
     "@type": "PostalAddress",
     addressLocality: config.city,
     addressCountry: "PL",
   },
+  email: config.email,
   url: "https://archivmilitary.com",
+  sameAs: ["https://allegro.pl/uzytkownik/army-bb"],
 }
 
 export default function RootLayout({

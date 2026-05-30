@@ -30,7 +30,7 @@ export function Footer() {
                 margin: 0,
               }}
             >
-              Nowy rozdział Army Shop Bielsko-Biała.
+              Militaria, demobil, noże wojskowe i sprzęt survivalowy. Army Shop Bielsko-Biała — skup i sprzedaż od 1997.
             </p>
           </div>
 

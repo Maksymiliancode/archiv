@@ -3,9 +3,14 @@ import { GrupaTaktyczna } from "../components/GrupaTaktyczna"
 import { config } from "@/config/archiv"
 
 export const metadata = {
-  title: "O nas — ARCHIV · Army Shop Bielsko-Biała",
+  title: "O nas",
   description:
-    "Prawie trzydzieści lat przy militariach. Poznaj historię Army Shop — od otwarcia w 1997 przez targi w całej Europie, aż po nowy rozdział: ARCHIV.",
+    "Prawie trzydzieści lat przy militariach. Poznaj historię Army Shop Bielsko-Biała — od otwarcia w 1997 przez targi w całej Europie, aż po nowy rozdział: ARCHIV.",
+  openGraph: {
+    title: "O nas — ARCHIV · Army Shop Bielsko-Biała",
+    description:
+      "Prawie trzydzieści lat przy militariach. Poznaj historię Army Shop Bielsko-Biała — od otwarcia w 1997 przez targi w całej Europie, aż po nowy rozdział: ARCHIV.",
+  },
 }
 
 export default function ONasPage() {

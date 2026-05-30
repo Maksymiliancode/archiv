@@ -3,7 +3,14 @@ import { config } from "@/config/archiv"
 import { DesantArchive } from "@/app/components/DesantArchive"
 
 export const metadata = {
-  title: "Archiwum Desantów — ARCHIV",
+  title: "Archiwum Desantów",
+  description:
+    "Comiesięczne desanty militariów — skrzynki numerowane 1/30. Militaria, demobil, noże i sprzęt survivalowy z kolekcji Army Shop Bielsko-Biała na Allegro.",
+  openGraph: {
+    title: "Archiwum Desantów — ARCHIV",
+    description:
+      "Comiesięczne desanty militariów — skrzynki numerowane 1/30. Militaria, demobil, noże i sprzęt survivalowy z kolekcji Army Shop Bielsko-Biała.",
+  },
 }
 
 export default async function DesantPage() {
