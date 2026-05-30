@@ -436,16 +436,57 @@
 /* ============================================================
    RESPONSYWNOŚĆ
    ============================================================ */
+/* ── Tablet (980px) ── */
 @media (max-width: 980px) {
-  .av-wrap  { padding: 0 28px; }
+  .av-wrap    { padding: 0 28px; }
   .av-section { padding: 76px 0; }
-  .av-nav   { padding: 22px 28px 18px; }
-  .av-cards { grid-template-columns: repeat(2, 1fr); }
+  .av-nav     { padding: 22px 28px 18px; }
+  .av-cards   { grid-template-columns: repeat(2, 1fr); }
   .av-reviews { grid-template-columns: 1fr; }
-  .av-form  { grid-template-columns: 1fr; }
+  .av-form    { grid-template-columns: 1fr; }
 }
-@media (max-width: 560px) {
+
+/* ── Duży telefon (760px) ── */
+@media (max-width: 760px) {
+  .av-wrap    { padding: 0 20px; }
+  .av-section { padding: 60px 0; }
+
+  /* Nav — wrap menu pod logo */
+  .av-nav { padding: 16px 20px 14px; flex-wrap: wrap; gap: 10px; }
+  .av-nav-menu { gap: 14px; flex-wrap: wrap; justify-content: flex-start; padding-top: 0; }
+  .av-nav-menu a { font-size: 11px; letter-spacing: 0.16em; }
+
+  /* Hero — chowamy skrzynię, tylko tekst */
+  .hero-crate { display: none !important; }
+  .hero-grid  { grid-template-columns: 1fr !important; gap: 0 !important; }
+
+  /* Przyciski — full width na mobile */
+  .btn-row { flex-direction: column; align-items: stretch; }
+  .btn-row .av-btn { text-align: center; justify-content: center; }
+
+  /* Banner */
+  .av-banner { padding: 24px 20px; flex-direction: column; align-items: flex-start; gap: 16px; }
+
+  /* Karty */
   .av-cards { grid-template-columns: 1fr; }
-  .av-count-block { min-width: 0; flex-basis: 40%; }
-  .av-nav-menu { gap: 18px; }
+}
+
+/* ── Mały telefon (480px) ── */
+@media (max-width: 480px) {
+  .av-wrap    { padding: 0 16px; }
+  .av-section { padding: 48px 0; }
+
+  /* Licznik — 2×2 grid */
+  .av-count { gap: 10px; }
+  .av-count-block { flex-basis: calc(50% - 5px); min-width: 0; padding: 16px 8px 12px; }
+  .av-count-num { font-size: clamp(38px, 11vw, 60px); }
+
+  /* Przyciski mniejsze */
+  .av-btn { padding: 14px 18px; font-size: 12px; letter-spacing: 0.12em; }
+
+  /* Stempel mniejszy */
+  .av-stamp { font-size: 12px; padding: 6px 12px; }
+
+  /* Sekcja nagłówek */
+  .av-sechead { font-size: clamp(32px, 9vw, 56px); }
 }

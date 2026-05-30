@@ -28,7 +28,7 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
         className="av-wrap"
         style={{ flex: 1, display: "flex", alignItems: "center", position: "relative", zIndex: 2, paddingTop: 60, paddingBottom: 60 }}
       >
-        <div style={{ width: "100%", display: "grid", gridTemplateColumns: "minmax(0,1fr) auto", gap: 40, alignItems: "center" }}>
+        <div className="hero-grid" style={{ width: "100%", display: "grid", gridTemplateColumns: "minmax(0,1fr) auto", gap: 40, alignItems: "center" }}>
 
           {/* Lewa kolumna */}
           <div className="av-fade">
@@ -43,7 +43,7 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
               Prawie trzydzieści lat kolekcjonowania. Teraz po raz pierwszy dostępne —
               dla każdego, kto wie, czego szuka, i dla tych, którzy dopiero zaczynają.
             </p>
-            <div style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
+            <div className="btn-row" style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
               <a className="av-btn av-btn-rust" href="#desant">
                 DESANT NR {String(nextCrate).padStart(2, "0")} · {nextDate ?? "1 WRZEŚNIA 2026"}
               </a>
@@ -53,8 +53,8 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
             </div>
           </div>
 
-          {/* Prawa kolumna — skrzynia */}
-          <div className="av-crate" style={{ padding: "34px 30px", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: 280 }}>
+          {/* Prawa kolumna — skrzynia (ukryta na mobile) */}
+          <div className="av-crate hero-crate" style={{ padding: "34px 30px", display: "flex", flexDirection: "column", alignItems: "center", gap: 16, width: 280 }}>
             <div className="av-thisway">↑↑&nbsp;&nbsp;GÓRA&nbsp;&nbsp;↑↑</div>
             <Image
               src="/stamp-us-army.png"

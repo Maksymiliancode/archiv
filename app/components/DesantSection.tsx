@@ -35,7 +35,7 @@ export async function DesantSection({ allegroUrl }: { allegroUrl: string }) {
           </>
         )}
 
-        <div style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginTop: 44 }}>
+        <div className="btn-row" style={{ display: "flex", gap: 14, justifyContent: "center", flexWrap: "wrap", marginTop: 44 }}>
           <a href="/desant" className="av-btn av-btn-rust">
             ARCHIWUM DESANTÓW →
           </a>
