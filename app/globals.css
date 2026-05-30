@@ -495,6 +495,14 @@
   .av-btn { padding: 12px 14px; font-size: 11px; letter-spacing: 0.1em; white-space: nowrap; }
 }
 
+/* ── Overflow global fix ── */
+body { overflow-x: hidden; }
+.av-wrap { overflow-x: hidden; }
+@media (max-width: 560px) {
+  .av-eyebrow { letter-spacing: 0.18em; font-size: 11px; }
+  p, li, h1, h2, h3 { overflow-wrap: break-word; word-break: break-word; }
+}
+
 /* ── Mały telefon (480px) ── */
 @media (max-width: 480px) {
   .av-wrap    { padding: 0 16px; }
