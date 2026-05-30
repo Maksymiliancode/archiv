@@ -47,11 +47,11 @@ export async function subscribeNewsletter(_prev: NewsletterResult, formData: For
       brevo("subscriber", {
         sender: { name: "ARCHIV", email: NOTIFY_EMAIL },
         to: [{ email }],
-        subject: "ARCHIV — meldunek przyjęty",
+        subject: "ARCHIV — wcielony do Grupy Taktycznej",
         textContent: [
-          "MELDUNEK PRZYJĘTY.",
+          "WCIELONY DO GRUPY TAKTYCZNEJ.",
           "",
-          "Dołączyłeś do Grupy Taktycznej. Dostaniesz cynk 48 godzin przed każdym desantem — zanim trafi na Allegro i zanim zobaczą to wszyscy.",
+          "Dostaniesz cynk 48 godzin przed każdym desantem — zanim trafi na Allegro i zanim zobaczą to wszyscy.",
           "",
           "Pierwsza skrzynia (1/30) startuje 1 września 2026.",
           "",

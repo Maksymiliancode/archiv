@@ -5,11 +5,11 @@ export const config = {
 
   // Kontakt
   whatsappNumber: "48502750088",
-  email: "archive.arek@gmail.com",
+  email: "archiv.arek@gmail.com",
 
   // Desant — data pierwszego desantu
   firstDesant: {
-    date: "2026-09-01T00:00:00",
+    date: "2026-09-01T04:34:00",
     number: "01",
     year: "2026",
   },
