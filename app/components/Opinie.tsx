@@ -103,6 +103,12 @@ export function Opinie() {
           clearTimeout(resumeRef.current)
           resumeRef.current = setTimeout(() => { pausedRef.current = false }, 400)
         }}
+        onTouchStart={() => { clearTimeout(resumeRef.current); pausedRef.current = true }}
+        onTouchEnd={() => {
+          autoOffRef.current = trackRef.current?.scrollLeft ?? autoOffRef.current
+          clearTimeout(resumeRef.current)
+          resumeRef.current = setTimeout(() => { pausedRef.current = false }, 2000)
+        }}
         style={{
           display: "flex",
           gap: GAP,
