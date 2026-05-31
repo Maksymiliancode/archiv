@@ -134,6 +134,11 @@ const TIMELINE = [
     body: "Ciney w Belgii o poranku — kilka hal, tysiące stoisk, Arek jak w domu. Pchle targi pod Berlinem o szóstej rano, kiedy większość sprzedawców jeszcze śpi — właśnie wtedy trafiają się rzeczy, których nie ma na żadnym zdjęciu w internecie. Houten, Praga, zloty jak Operacja Południe i D-Day Hel. Kontenery ze Stanów: Wietnam, Korea, druga wojna, Iran. Setki kilometrów busem w każdą stronę, przerzucane kartony na parkingach o świcie, transakcje udane i takie mniej. Nauczony odróżniać oryginał od kopii — to lekcja, której nie ma w żadnym podręczniku. Sklep rósł razem z ludźmi — Tadziu czyli Borsuk: twarz sklepu i nieodłączny element wyposażenia; Axel: chodzące kompendium wiedzy wojskowej i bezużytecznej, co do joty; Paweł: jedyny prawdziwy IT guy w ekipie, który ogarnął Allegro, bo starsi nie bardzo potrafili. Przez te trzy dekady Arek zbierał najlepsze egzemplarze i chował głębiej niż inne towary. Wiedział, że kiedyś przyjdzie na nie czas.",
   },
   {
+    year: "2022",
+    head: "UKRAINA · WOLONTARIAT",
+    body: "Wybuch pełnoskalowej inwazji przyniósł zupełnie inny rodzaj wyzwania. Fundacje, organizacje i wolontariusze nagle szukali kogoś, kto wie jak kupić dobry sprzęt — nie podróbkę, nie towar przeszacowany przez trzech pośredników. Arek działał wtedy przede wszystkim charytatywnie: dzielił się wiedzą, pomagał organizować zaopatrzenie, był prawdziwym łącznikiem między chętnymi do pomocy a sprawdzonymi dostawcami jakościowego wyposażenia. Nieprzespane noce, nowe znajomości z całego kraju i Europy, zamówienia innej skali niż dotychczas. Trudny czas — ale też dowód na to, że trzydzieści lat w terenie to coś znacznie więcej niż pasja.",
+  },
+  {
     year: "2026",
     head: "MAKS · ARCHIV",
     body: "Drugi syn Maks pewnego dnia pokazał Arekowi, co można zrobić z tym wszystkim online. Efekt: ARCHIV. Nie wyprzedaż, nie likwidacja — zwieńczenie. Platforma, która daje każdemu kolekcjonerowi — nawet temu, który nie ma czasu jeździć po Europie — dostęp do dokładnie tych przedmiotów, które Arek latami odkładał dla siebie. Co miesiąc nowa skrzynia. Raz ląduje, raz znika. Jak na targu — tylko bez wstawania o szóstej rano pod Hamburgiem.",
