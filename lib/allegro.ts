@@ -188,8 +188,13 @@ export async function getActiveOffers(limit = 1000): Promise<AllegroResult> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mapped: AllegroOffer[] = offers.map((o: any) => {
       const crate  = parseDesantCrate(o.name)
-      const amount = o.sellingMode?.price?.amount ?? o.sellingMode?.startingPrice?.amount
-      const price  = amount ? `${Number(amount).toFixed(0)} zł` : '—'
+      const amount = o.sellingMode?.price?.amount
+        ?? o.sellingMode?.currentPrice?.amount
+        ?? o.sellingMode?.startingPrice?.amount
+      const isAuction = o.sellingMode?.format === 'AUCTION'
+      const price = amount
+        ? `${isAuction && !o.sellingMode?.currentPrice?.amount ? 'od ' : ''}${Number(amount).toFixed(0)} zł`
+        : '—'
       const { text: timeText, urgent } = timeLabel(o.publication?.endingAt ?? null)
       const cleanTitle = crate !== null ? stripDesantTag(o.name) : o.name
 
@@ -237,8 +242,10 @@ export async function getEndedDesantOffers(): Promise<AllegroResult> {
     const mapped = offers.reduce((acc: AllegroOffer[], o: any) => {
       const crate = parseDesantCrate(o.name)
       if (crate === null) return acc
-      const amount   = o.sellingMode?.price?.amount ?? o.sellingMode?.startingPrice?.amount
-      const price    = amount ? `${Number(amount).toFixed(0)} zł` : '—'
+      const amount = o.sellingMode?.price?.amount
+        ?? o.sellingMode?.currentPrice?.amount
+        ?? o.sellingMode?.startingPrice?.amount
+      const price = amount ? `${Number(amount).toFixed(0)} zł` : '—'
       const cleanTitle = stripDesantTag(o.name)
       acc.push({
         id:          o.id,
