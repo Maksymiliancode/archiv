@@ -30,13 +30,17 @@ const GAP     = 28
 const STEP    = CARD_W + GAP  // 348 px
 
 export function Opinie() {
-  const trackRef  = useRef<HTMLDivElement>(null)
-  const offsetRef = useRef(0)
-  const pausedRef = useRef(false)
-  const rafRef    = useRef<number>(0)
+  const trackRef       = useRef<HTMLDivElement>(null)
+  const dragAreaRef    = useRef<HTMLDivElement>(null)
+  const offsetRef      = useRef(0)
+  const pausedRef      = useRef(false)
+  const rafRef         = useRef<number>(0)
+  const isDraggingRef  = useRef(false)
+  const dragStartXRef  = useRef(0)
+  const dragStartOff   = useRef(0)
 
   const doubled   = [...REVIEWS, ...REVIEWS]
-  const halfWidth = REVIEWS.length * STEP   // punkt resetu
+  const halfWidth = REVIEWS.length * STEP
 
   useEffect(() => {
     const track = trackRef.current
@@ -62,10 +66,33 @@ export function Opinie() {
     }
   }
 
+  const onMouseDown = (e: React.MouseEvent) => {
+    isDraggingRef.current = true
+    dragStartXRef.current = e.clientX
+    dragStartOff.current  = offsetRef.current
+    pausedRef.current     = true
+    if (dragAreaRef.current) dragAreaRef.current.style.cursor = "grabbing"
+  }
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDraggingRef.current) return
+    const delta = dragStartXRef.current - e.clientX
+    offsetRef.current = ((dragStartOff.current + delta) % halfWidth + halfWidth) % halfWidth
+    if (trackRef.current) {
+      trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`
+    }
+  }
+
+  const onMouseUp = () => {
+    isDraggingRef.current = false
+    pausedRef.current     = false
+    if (dragAreaRef.current) dragAreaRef.current.style.cursor = "grab"
+  }
+
   return (
     <section
       className="av-section av-section-dark av-grain av-grain-dark"
-      style={{ paddingBottom: 90 }}
+      style={{ paddingBottom: 90, overflow: "hidden" }}
     >
       {/* nagłówek wewnątrz wrapa */}
       <div className="av-wrap av-fade" style={{ position: "relative", zIndex: 2, marginBottom: 48 }}>
@@ -90,16 +117,24 @@ export function Opinie() {
       </div>
 
       {/* track — wychodzi poza wrap żeby krawędziowo się ucinał */}
-      <div style={{ overflow: "hidden", paddingBottom: 18 }}>
+      <div
+        ref={dragAreaRef}
+        style={{ paddingBottom: 18, cursor: "grab" }}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={onMouseUp}
+        onMouseLeave={onMouseUp}
+      >
         <div
           ref={trackRef}
           style={{
             display: "flex",
             gap: GAP,
             width: "max-content",
-            paddingLeft: 56,          // wyrównanie z av-wrap
-            paddingBottom: 18,        // miejsce na cień kart
+            paddingLeft: 56,
+            paddingBottom: 18,
             willChange: "transform",
+            userSelect: "none",
           }}
         >
           {doubled.map((r, i) => (
@@ -111,8 +146,6 @@ export function Opinie() {
                 flexShrink: 0,
                 transform: `rotate(${TILTS[i % TILTS.length]})`,
               }}
-              onMouseEnter={() => { pausedRef.current = true }}
-              onMouseLeave={() => { pausedRef.current = false }}
             >
               <div className="av-review-stars">★★★★★</div>
               <p className="av-review-q">„{r.text}"</p>
