@@ -397,7 +397,7 @@ function Acknowledgments() {
           ARCHIV nie powstałby bez ludzi.<br /><br />
           Bez Moniki — która była na targach równie często co Arek
           i handlowała równie dobrze. Bez Filipa, który — sam o tym nie wiedząc —
-          zapoczątkował całą tę historię. Bez Maksa, który zamienił pasję w platformę.<br /><br />
+          zapoczątkował całą tę historię. Bez Maksa, który zamienił pasję w tę platformę.<br /><br />
           Bez Wojtka — partnera w drodze. Bez pracowników, którzy przez lata trzymali fort.
           Bez kontrahentów z całej Europy i świata — za każdą transakcję i każdą wskazówkę.<br /><br />
           Przede wszystkim — bez klientów, którzy zaufali i wrócili.
