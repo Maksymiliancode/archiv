@@ -40,8 +40,9 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
               ARCHIV.
             </div>
             <p style={{ fontFamily: "var(--f-quote)", fontStyle: "italic", fontSize: "clamp(19px,2vw,24px)", lineHeight: 1.55, color: "var(--gold)", maxWidth: 560, margin: "34px 0 40px" }}>
-              Trzydzieści lat kolekcjonowania. Teraz po raz pierwszy dostępne —
-              dla każdego, kto wie, czego szuka, i dla tych, którzy dopiero zaczynają.
+              Trzydzieści lat zbierania unikatowych przedmiotów z całego świata.
+              ARCHIV to najciekawsze stoisko na targu wojskowym — przeniesione online,
+              otwarte dla każdego, co miesiąc nowa skrzynia z kolekcji.
             </p>
             <div className="btn-row" style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
               <a className="av-btn av-btn-rust" href="#desant">
@@ -50,18 +51,6 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
               <a className="av-btn av-btn-ghost" href={config.allegroProfileUrl} target="_blank" rel="noopener noreferrer">
                 AKTUALNE AUKCJE NA ALLEGRO →
               </a>
-            </div>
-
-            <div style={{ marginTop: 36, paddingTop: 28, borderTop: "1px solid rgba(212,175,55,0.12)", maxWidth: 560 }}>
-              <div style={{ fontFamily: "var(--f-mono)", fontSize: 10, letterSpacing: "0.38em", color: "var(--rust)", marginBottom: 14 }}>
-                IDEA
-              </div>
-              <p style={{ fontFamily: "var(--f-body)", fontSize: 15, lineHeight: 1.8, color: "var(--faded)", margin: 0 }}>
-                Na każdym targu wojskowym jest jedno stoisko, przy którym zatrzymujesz się najdłużej.
-                ARCHIV to to stoisko — przeniesione online, otwarte dla każdego, bez kurzu i kolejki.
-                Co miesiąc nowa skrzynia z kolekcji: unikaty zbierane przez trzydzieści lat,
-                które jak na każdym dobrym targu — znikają pierwsze.
-              </p>
             </div>
           </div>
 
