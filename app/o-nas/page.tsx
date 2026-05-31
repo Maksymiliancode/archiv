@@ -68,8 +68,7 @@ function AboutIntro() {
             Za ARCHIV stoi Arek — kolekcjoner z ponad trzydziestoletnim
             stażem na targach Europy i Stanów. Przez te lata zbierał rzeczy,
             których nie znajdziesz nigdzie indziej. ARCHIV powstał po to,
-            żeby dostęp do tych przedmiotów miał każdy kolekcjoner —
-            nie tylko ten z czasem i busem do Niemiec.
+            żeby dostęp do tych przedmiotów miał każdy kolekcjoner.
           </p>
         </div>
 
