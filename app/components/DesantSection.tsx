@@ -61,7 +61,7 @@ export async function DesantSection({ allegroUrl }: { allegroUrl: string }) {
                 fontSize: 22, lineHeight: 1.6, color: "#4a4332",
                 maxWidth: 660, margin: "32px auto 0",
               }}>
-                1 września pierwsze przedmioty z kolekcji Archiv lądują na Allegro — militaria,
+                1 września przedmioty z pierwszej skrzyni kolekcji ARCHIV lądują na Allegro — militaria,
                 noże, demobil i sprzęt survivalowy w limitowanym czasie i dobrej cenie.
                 Później każdego 7. dnia miesiąca.
               </p>
