@@ -51,6 +51,18 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
                 AKTUALNE AUKCJE NA ALLEGRO →
               </a>
             </div>
+
+            <div style={{ marginTop: 36, paddingTop: 28, borderTop: "1px solid rgba(212,175,55,0.12)", maxWidth: 560 }}>
+              <div style={{ fontFamily: "var(--f-mono)", fontSize: 10, letterSpacing: "0.38em", color: "var(--rust)", marginBottom: 14 }}>
+                IDEA
+              </div>
+              <p style={{ fontFamily: "var(--f-body)", fontSize: 15, lineHeight: 1.8, color: "var(--faded)", margin: 0 }}>
+                Na każdym targu wojskowym jest jedno stoisko, przy którym zatrzymujesz się najdłużej.
+                ARCHIV to to stoisko — przeniesione online, otwarte dla każdego, bez kurzu i kolejki.
+                Co miesiąc nowa skrzynia z kolekcji: unikaty zbierane przez trzydzieści lat,
+                które jak na każdym dobrym targu — znikają pierwsze.
+              </p>
+            </div>
           </div>
 
           {/* Prawa kolumna — skrzynia (ukryta na mobile) */}
