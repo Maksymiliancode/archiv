@@ -274,9 +274,9 @@ function Idea() {
               }}
             >
               To nie kolejny sklep z militariami. To najlepsze stoisko
-              z każdego targu — zebrane razem, dostępne dla każdego,
-              raz w miesiącu. Przedmioty z historią, zebrane przez lata
-              z całego świata. Ciche, unikalne, oryginalne.
+              na zlocie militarnym — dostępne dla każdego, raz w miesiącu.
+              Przedmioty z historią, zbierane przez lata z całego świata.
+              Ciche, unikalne, oryginalne.
             </p>
             <p
               style={{
