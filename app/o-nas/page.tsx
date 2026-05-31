@@ -291,6 +291,7 @@ function Idea() {
             >
               „Zawsze wiedziałem, że te rzeczy zasługują na lepszy dom.
               Teraz mają szansę go znaleźć."
+              <br /><span style={{ fontSize: "0.75em", letterSpacing: "0.18em", opacity: 0.7 }}>~ Arek, założyciel ARCHIV</span>
             </p>
           </div>
         </div>
