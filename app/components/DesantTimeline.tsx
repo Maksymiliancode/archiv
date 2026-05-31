@@ -46,6 +46,7 @@ function Timeline({ children }: { children: React.ReactNode }) {
     <div style={{
       display: "flex", alignItems: "flex-start",
       justifyContent: "center", marginBottom: 48,
+      paddingTop: 14,
     }}>
       {children}
     </div>
