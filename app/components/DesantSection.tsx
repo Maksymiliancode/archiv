@@ -165,15 +165,31 @@ export async function DesantSection({ allegroUrl }: { allegroUrl: string }) {
           display: "flex", gap: 14, justifyContent: "center",
           flexWrap: "wrap", marginTop: 44,
         }}>
-          <a href="/desant" className="av-btn av-btn-rust">
-            ARCHIWUM DESANTÓW →
-          </a>
-          <a className="av-btn av-btn-ghost" href={allegroUrl} target="_blank" rel="noopener noreferrer">
-            OBSERWUJ KONTO ALLEGRO →
-          </a>
-          <a className="av-btn av-btn-ghost" href="/#newsletter">
-            ZAPISZ SIĘ BY NIE PRZEGAPIĆ →
-          </a>
+          {state === 0 ? (
+            <>
+              <a className="av-btn av-btn-rust" href="/#newsletter">
+                ZAPISZ SIĘ BY NIE PRZEGAPIĆ →
+              </a>
+              <a href="/desant" className="av-btn av-btn-ghost">
+                ARCHIWUM DESANTÓW →
+              </a>
+              <a className="av-btn av-btn-ghost" href={allegroUrl} target="_blank" rel="noopener noreferrer">
+                OBSERWUJ KONTO ALLEGRO →
+              </a>
+            </>
+          ) : (
+            <>
+              <a href="/desant" className="av-btn av-btn-rust">
+                ARCHIWUM DESANTÓW →
+              </a>
+              <a className="av-btn av-btn-ghost" href={allegroUrl} target="_blank" rel="noopener noreferrer">
+                OBSERWUJ KONTO ALLEGRO →
+              </a>
+              <a className="av-btn av-btn-ghost" href="/#newsletter">
+                ZAPISZ SIĘ BY NIE PRZEGAPIĆ →
+              </a>
+            </>
+          )}
         </div>
 
       </div>

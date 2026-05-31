@@ -124,6 +124,85 @@
 .av-nav-menu a:hover { border-bottom-color: var(--gold); }
 
 /* ============================================================
+   NAV — STICKY + HAMBURGER + MOBILE
+   ============================================================ */
+:root { --nav-h: 92px; }
+html  { scroll-padding-top: var(--nav-h); }
+body  { padding-top: var(--nav-h); }
+
+/* Hamburger — ukryty na desktop */
+.av-hamburger { display: none; }
+
+/* Mobile dropdown */
+.av-mob-menu {
+  position: fixed;
+  top: var(--nav-h);
+  left: 0; right: 0;
+  z-index: 199;
+  background: var(--bg-dark-2);
+  border-bottom: 1px solid rgba(184,151,90,0.18);
+  display: flex;
+  flex-direction: column;
+  padding: 0 24px 20px;
+  transform: translateY(-110%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .28s ease, opacity .2s;
+}
+.av-mob-menu.is-open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+.av-mob-link {
+  font-family: var(--f-stamp);
+  font-size: 18px;
+  letter-spacing: 0.22em;
+  color: var(--gold);
+  text-decoration: none;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(184,151,90,0.10);
+}
+.av-mob-link:last-child { border-bottom: none; }
+
+/* Hamburger ikona */
+.av-hamburger {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.av-ham {
+  width: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.av-ham span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--gold);
+  transition: transform .25s, opacity .2s;
+  transform-origin: center;
+}
+.av-ham.is-open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.av-ham.is-open span:nth-child(2) { opacity: 0; }
+.av-ham.is-open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+@media (max-width: 640px) {
+  :root    { --nav-h: 52px; }
+  .av-nav  { padding: 10px 20px; align-items: center; }
+  .av-nav-logo b    { font-size: 24px; }
+  .av-nav-logo span { display: none; }
+  .av-nav-desktop   { display: none !important; }
+  .av-hamburger     { display: flex; }
+}
+
+/* ============================================================
    PRZYCISKI
    ============================================================ */
 .av-btn {
