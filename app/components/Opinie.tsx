@@ -30,9 +30,8 @@ const STEP     = CARD_W + GAP
 export function Opinie() {
   const trackRef       = useRef<HTMLDivElement>(null)
   const rafRef         = useRef<number>(0)
-  const autoOffRef     = useRef(0)       // akumuluje ułamkowe piksele
+  const autoOffRef     = useRef(0)
   const pausedRef      = useRef(false)
-  const isAutoRef      = useRef(false)   // czy scroll pochodzi od auto-scroll
   const resumeRef      = useRef<ReturnType<typeof setTimeout>>(undefined)
 
   const doubled   = [...REVIEWS, ...REVIEWS]
@@ -46,35 +45,16 @@ export function Opinie() {
       if (!pausedRef.current) {
         autoOffRef.current += SPEED
         if (autoOffRef.current >= halfWidth) autoOffRef.current -= halfWidth
-        isAutoRef.current = true
         track.scrollLeft = autoOffRef.current
-        isAutoRef.current = false
       }
       rafRef.current = requestAnimationFrame(tick)
     }
 
-    // Natywny listener żeby sprawdzać flagę synchronicznie
-    const onScroll = () => {
-      if (isAutoRef.current) return
-      // Użytkownik scrolluje — pauzuj i synchronizuj pozycję
-      pausedRef.current = true
-      autoOffRef.current = track.scrollLeft
-      // Bezszwowa pętla w przód
-      if (track.scrollLeft >= halfWidth) {
-        track.scrollLeft -= halfWidth
-        autoOffRef.current = track.scrollLeft
-      }
-      clearTimeout(resumeRef.current)
-      resumeRef.current = setTimeout(() => { pausedRef.current = false }, 2000)
-    }
-
-    track.addEventListener("scroll", onScroll, { passive: true })
     rafRef.current = requestAnimationFrame(tick)
 
     return () => {
       cancelAnimationFrame(rafRef.current)
       clearTimeout(resumeRef.current)
-      track.removeEventListener("scroll", onScroll)
     }
   }, [halfWidth])
 
@@ -119,8 +99,12 @@ export function Opinie() {
       <div
         ref={trackRef}
         className="av-opinie"
-        onMouseEnter={() => { pausedRef.current = true }}
-        onMouseLeave={() => { pausedRef.current = false; clearTimeout(resumeRef.current) }}
+        onMouseEnter={() => { clearTimeout(resumeRef.current); pausedRef.current = true }}
+        onMouseLeave={() => {
+          autoOffRef.current = trackRef.current?.scrollLeft ?? autoOffRef.current
+          clearTimeout(resumeRef.current)
+          resumeRef.current = setTimeout(() => { pausedRef.current = false }, 400)
+        }}
         style={{
           display: "flex",
           gap: GAP,
