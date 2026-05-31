@@ -188,12 +188,12 @@ export async function getActiveOffers(limit = 1000): Promise<AllegroResult> {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mapped: AllegroOffer[] = offers.map((o: any) => {
       const crate  = parseDesantCrate(o.name)
-      const amount = o.sellingMode?.price?.amount
-        ?? o.sellingMode?.currentPrice?.amount
-        ?? o.sellingMode?.startingPrice?.amount
       const isAuction = o.sellingMode?.format === 'AUCTION'
+      const amount = isAuction
+        ? o.sellingMode?.startingPrice?.amount
+        : o.sellingMode?.price?.amount
       const price = amount
-        ? `${isAuction && !o.sellingMode?.currentPrice?.amount ? 'od ' : ''}${Number(amount).toFixed(0)} zł`
+        ? `${isAuction ? 'od ' : ''}${Number(amount).toFixed(0)} zł`
         : '—'
       const { text: timeText, urgent } = timeLabel(o.publication?.endingAt ?? null)
       const cleanTitle = crate !== null ? stripDesantTag(o.name) : o.name
