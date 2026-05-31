@@ -124,7 +124,7 @@ const TIMELINE = [
   {
     year: "1997",
     head: "FILIP · ZAPALNIK",
-    body: "Filip — pierworodny syn — przyszedł na świat i Arek wziął się za swoje. Army Shop Bielsko ruszył. Klienci szybko poczuli, że ten za ladą wie dlaczego kurtka lotnicza z 1968 jest warta trzy razy więcej od repliki.",
+    body: "1997. Na świat przyszedł Filip. Army Shop Bielsko ruszył. Klienci szybko poczuli, że ten za ladą wie dlaczego kurtka lotnicza z 1968 jest warta trzy razy więcej od repliki.",
   },
   {
     year: "1997–2026",
