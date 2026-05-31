@@ -5,11 +5,11 @@ import { config } from "@/config/archiv"
 export const metadata = {
   title: "O nas",
   description:
-    "Prawie trzydzieści lat przy militariach. Poznaj historię Army Shop Bielsko-Biała — od otwarcia w 1997 przez targi w całej Europie, aż po nowy rozdział: ARCHIV.",
+    "Prawie trzydzieści lat na targach Europy i Stanów. Historia Arka — kolekcjonera, który przenosi wiedzę i pasję do świata online. To jest ARCHIV.",
   openGraph: {
-    title: "O nas — ARCHIV · Army Shop Bielsko-Biała",
+    title: "O nas — ARCHIV",
     description:
-      "Prawie trzydzieści lat przy militariach. Poznaj historię Army Shop Bielsko-Biała — od otwarcia w 1997 przez targi w całej Europie, aż po nowy rozdział: ARCHIV.",
+      "Prawie trzydzieści lat na targach Europy i Stanów. Historia Arka — kolekcjonera, który przenosi wiedzę i pasję do świata online. To jest ARCHIV.",
   },
 }
 
@@ -20,6 +20,7 @@ export default function ONasPage() {
       <History />
       <Idea />
       <HowItWorks />
+      <Acknowledgments />
       <GrupaTaktyczna />
       <AboutCTA />
     </main>
@@ -50,8 +51,8 @@ function AboutIntro() {
             className="av-sechead"
             style={{ fontSize: "clamp(46px,7vw,92px)", lineHeight: 0.92 }}
           >
-            RODZINNA<br />SPRAWA<br />
-            <span style={{ color: "var(--rust)" }}>OD 1997.</span>
+            TRZYDZIEŚCI<br />LAT W TERENIE.<br />
+            <span style={{ color: "var(--rust)" }}>2026: ARCHIV.</span>
           </h1>
           <p
             style={{
@@ -64,10 +65,11 @@ function AboutIntro() {
               margin: "32px 0 0",
             }}
           >
-            Przez 30 lat Arek, współzałożyciel Army Shop Bielsko-Biała,
-            zaopatrywał kolekcjonerów, fachowców, survivalowców i wojskowych.
-            Jednocześnie sam stał się kolekcjonerem — i po trzech dekadach
-            postanowił otworzyć magazyn dla każdego.
+            Arek od prawie trzydziestu lat jeździ po targach Europy i Stanów
+            w poszukiwaniu rzeczy, których nigdzie indziej nie ma — Ciney,
+            pchle targi pod Hamburgiem, Houten, Praga, sutereny i magazyny
+            od Atlantyku po Pacyfik. Archiv to ta wiedza i pasja,
+            dostępna dla każdego.
           </p>
         </div>
 
@@ -123,18 +125,18 @@ function AboutIntro() {
 const TIMELINE = [
   {
     year: "1997",
-    head: "POCZĄTEK",
-    body: "Arek i Wojtek otwierają Army Shop w Bielsku-Białej. Ten sam rok przynosi Arekowi podwójną wiadomość — sklep i pierworodny syn. Od pierwszego dnia jedna zasada: prawdziwy sprzęt, uczciwa rozmowa, wiedza z pierwszej ręki.",
+    head: "FILIP · ZAPALNIK",
+    body: "Gdy na świat przyszedł Filip, decyzja była prosta: własny biznes. Sklep ruszył. Klienci szybko poczuli, że Arek wie co sprzedaje i dlaczego to warte swojej ceny. To zostało.",
   },
   {
     year: "1997–2026",
-    head: "TRZY DEKADY",
-    body: "Sklep rósł razem z ludźmi. Wojtek jako wspólnik od pierwszego dnia — bez niego nie byłoby drugiego filaru. Tadziu, czyli Borsuk, zawsze za ladą: twarz sklepu, nieodłączny element wyposażenia. Axel — chodzące kompendium wiedzy wojskowej i bezużytecznej, co do joty. Paweł — prawdziwy IT guy — ogarnął sprzedaż na Allegro, bo starsi nie bardzo potrafili: zdjęcia, aukcje, wysyłka. Przez te trzy dekady jeździli na targi i festiwale po całej Europie — od Operacji Południe na bielskich Błoniach, przez D-Day Hel i targi w Niemczech, aż po Ciney w Belgii. Przez sklep i namioty Army Shopu przewinęły się tysiące ludzi — klientów, kolekcjonerów, znajomych z targów. Wszystkim dziękujemy. Na pewien czas Army Shop otworzył też oddział w Cieszynie. Tak rosło archiwum.",
+    head: "EUROPA · STANY · TEREN",
+    body: "Ciney w Belgii, pchle targi pod Berlinem, Houten, Praga — i kontenery ze Stanów: sprzęt z Wietnamu, z Korei, z drugiej wojny, z Iranu. Do tego zloty jak Operacja Południe czy D-Day Hel — miejsca, gdzie rosły przyjaźnie i znajomości, które działają do dziś. Przez prawie trzy dekady Arek kupował mądrze i odkładał to, czego nie chciał od razu sprzedawać. Tak rosło archiwum.",
   },
   {
     year: "2026",
-    head: "ARCHIV",
-    body: "Po trzydziestu latach Arek otwiera swój ARCHIV. Nie wyprzedaż, nie likwidacja — zwieńczenie. To, co przez trzy dekady odkładał celowo, nie wystawiał, chował głębiej niż inne towary, teraz trafia do ludzi. Czy inspiracja to Archive, czy New Model Army — nie wiadomo. Jedno jest pewne: długo będzie na listach przebojów każdego, kto ma cokolwiek wspólnego z militariami. Comiesięczne desanty na Allegro. Skrzynki numerowane 1/30. Każdy przedmiot z historią.",
+    head: "MAKS · ARCHIV",
+    body: "Drugi syn, Maks, buduje platformę. Archiv startuje. Kolekcja po raz pierwszy trafia do ludzi — nie jako kolejny sklep ze stałą ofertą, ale jako comiesięczny desant z najlepszego, co świat ma do zaoferowania.",
   },
 ]
 
@@ -265,26 +267,13 @@ function Idea() {
                 lineHeight: 1.7,
                 color: "var(--light)",
                 maxWidth: 580,
-                margin: "0 0 22px",
-              }}
-            >
-              ARCHIV to spełnienie marzeń Arka — zwieńczenie 30 lat ciężkiej pracy.
-              Dla niego to zamknięcie pewnego etapu i piękne podsumowanie. Dla was:
-              szansa na zakup w atrakcyjnej cenie i świetna rozrywka.
-            </p>
-            <p
-              style={{
-                fontFamily: "var(--f-body)",
-                fontSize: 19,
-                lineHeight: 1.7,
-                color: "var(--light)",
-                maxWidth: 580,
                 margin: "0 0 28px",
               }}
             >
-              Tak jak w Army Shopie — dobra zabawa, kontakt z ludźmi
-              z pasją, a na koniec dobicie targu. Tylko że tym razem
-              z całej Polski, bez wychodzenia z domu.
+              To nie kolejny sklep z militariami. To najlepsze stoisko
+              z każdego targu — zebrane razem, dostępne dla każdego,
+              raz w miesiącu. Przedmioty z historią, zebrane przez lata
+              z całego świata. Ciche, unikalne, oryginalne.
             </p>
             <p
               style={{
@@ -297,8 +286,8 @@ function Idea() {
                 margin: 0,
               }}
             >
-              „Każdy znajdzie tu coś dla siebie — ale żaden przedmiot
-              nie wraca drugi raz."
+              „Przez trzydzieści lat wiedziałem, że te rzeczy zasługują
+              na lepszy dom. Teraz go mają."
             </p>
           </div>
         </div>
@@ -322,7 +311,7 @@ const HOW = [
   {
     nr: "03",
     head: "PODSTAWY",
-    body: "Dwie rzeczy, na których stoi ARCHIV. Pierwsza: wiedza — za każdym przedmiotem stoi ktoś, kto zna go z historii i z ręki, doradzi, opowie, sprawdzi autentyczność. Jak od 1997 roku. Druga: stała oferta na Allegro — ci, którzy ją znają, wiedzą, że sama w sobie była już dość wyszukana i specyficzna. To nie przypadkowy asortyment.",
+    body: "Dwie rzeczy, na których stoi ARCHIV. Pierwsza: wiedza — za każdym przedmiotem stoi ktoś, kto zna go z historii i z ręki, doradzi, opowie, sprawdzi autentyczność. Bo Archiv to lata w terenie, nie katalog z magazynu. Druga: stała oferta na Allegro — ci, którzy ją znają, wiedzą, że sama w sobie była już dość wyszukana i specyficzna. To nie przypadkowy asortyment.",
   },
 ]
 
@@ -380,6 +369,37 @@ function HowItWorks() {
             </div>
           ))}
         </div>
+      </div>
+    </section>
+  )
+}
+
+/* ── PODZIĘKOWANIA ───────────────────────────────────────────────── */
+function Acknowledgments() {
+  return (
+    <section className="av-section av-section-dark av-grain av-grain-dark">
+      <div className="av-wrap av-fade" style={{ position: "relative", zIndex: 2, textAlign: "center" }}>
+        <div className="av-eyebrow" style={{ color: "var(--gold)" }}>PODZIĘKOWANIA</div>
+        <p
+          style={{
+            fontFamily: "var(--f-quote)",
+            fontStyle: "italic",
+            fontSize: "clamp(17px,1.8vw,20px)",
+            lineHeight: 1.9,
+            color: "rgba(232,223,200,0.85)",
+            margin: "32px auto 0",
+            maxWidth: 660,
+          }}
+        >
+          Archiv nie powstałby bez ludzi.<br /><br />
+          Bez Moniki — która była na targach równie często co Arek
+          i handlowała równie dobrze. Bez Filipa, który — sam o tym nie wiedząc —
+          zapoczątkował całą tę historię. Bez Maksa, który zamienił pasję w platformę.<br /><br />
+          Bez Wojtka — partnera w drodze. Bez pracowników, którzy przez lata trzymali fort.
+          Bez kontrahentów z całej Europy i świata — za każdą transakcję i każdą wskazówkę.<br /><br />
+          Przede wszystkim — bez klientów, którzy zaufali i wrócili.
+          Bez Was Archiv nie ma sensu.
+        </p>
       </div>
     </section>
   )
