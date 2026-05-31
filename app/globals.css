@@ -621,7 +621,7 @@ body { overflow-x: hidden; }
 
   /* Carousel header — stamp nie wypycha strzałek */
   .av-dsc-hdr { gap: 10px; }
-  .av-dsc-hdr .av-stamp { white-space: normal; font-size: 11px; flex-shrink: 1; min-width: 0; }
+  .av-dsc-hdr .av-stamp { white-space: normal; font-size: 11px; flex-shrink: 1; flex-grow: 0; min-width: 0; width: fit-content; }
 
   /* Licznik — zawsze 1×4 (nie zawija się) */
   .av-count { gap: 6px; flex-wrap: nowrap; }
