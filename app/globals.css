@@ -37,10 +37,10 @@
 /* ============================================================
    SCROLLBAR — ukryty globalnie (strona z ciemną estetyką)
    ============================================================ */
-html {
+* {
   scrollbar-width: none;
 }
-html::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }
 

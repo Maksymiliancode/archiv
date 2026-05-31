@@ -87,6 +87,7 @@ export function DesantCarousel({ offers, allegroUrl }: { offers: AllegroOffer[];
           display: "flex",
           gap: GAP,
           overflowX: "auto",
+          overflowY: "hidden",
           scrollbarWidth: "none",
           paddingBottom: 6,
           textAlign: "left",
