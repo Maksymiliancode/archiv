@@ -129,7 +129,7 @@ const TIMELINE = [
   {
     year: "1997–2026",
     head: "EUROPA · STANY · TEREN",
-    body: "Europejski obwód: Ciney w Belgii, pchle targi pod Berlinem, Houten, Praga — każde targowisko ze swoimi stałymi bywalcami i ukrytymi skarbami. Osobna historia to kontenery ze Stanów: sprzęt z Wietnamu, Korei, Iranu — inne źródła, inne rozmowy, inna skala. Setki kilometrów busem, kartony na parkingach o świcie, transakcje udane i nieudane. Nauka odróżniania oryginału od kopii — na własnej skórze, nie z podręcznika. Nie łatwo było oddzielić taki biznes od życia prywatnego — ale nie ma tego złego... Haribo z Niemiec i inne gadżety niedostępne w Polsce zawsze smakowały lepiej. Dawały radę. Przez trzy dekady Arek odkładał to, co było zbyt dobre na sprzedaż. Tak rosło archiwum.",
+    body: "Europejski obwód: Ciney w Belgii, pchle targi pod Berlinem, Houten, Praga — każde targowisko ze swoimi stałymi bywalcami i ukrytymi skarbami. Osobna historia to kontenery ze Stanów: sprzęt z Wietnamu, Korei, Iranu — inne źródła, inne rozmowy, inna skala. Setki kilometrów busem, kartony na parkingach o świcie, transakcje udane i nieudane. Nauka odróżniania oryginału od kopii — na własnej skórze, nie z podręcznika. Nie łatwo było oddzielić taki biznes od życia prywatnego — ale nie ma tego złego... Haribo z Niemiec i inne gadżety niedostępne w Polsce zawsze smakowały lepiej. Przez trzy dekady Arek odkładał to, co było zbyt dobre na sprzedaż. Tak rosło archiwum.",
   },
   {
     year: "2022",
