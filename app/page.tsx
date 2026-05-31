@@ -5,6 +5,7 @@ import { Auctions } from "./components/Auctions"
 import { Meldunek } from "./components/Meldunek"
 import { Opinie } from "./components/Opinie"
 import { GrupaTaktyczna } from "./components/GrupaTaktyczna"
+import { Misja } from "./components/Misja"
 import { getActiveOffers } from "@/lib/allegro"
 import { config } from "@/config/archiv"
 
@@ -18,6 +19,7 @@ export default async function Page() {
   return (
     <main>
       <Hero currentCrate={currentCrate} />
+      <Misja />
       <Suspense fallback={null}>
         <DesantSection allegroUrl={config.allegroProfileUrl} />
       </Suspense>

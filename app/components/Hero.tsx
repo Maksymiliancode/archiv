@@ -40,7 +40,7 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
               ARCHIV.
             </div>
             <p style={{ fontFamily: "var(--f-quote)", fontStyle: "italic", fontSize: "clamp(19px,2vw,24px)", lineHeight: 1.55, color: "var(--gold)", maxWidth: 560, margin: "34px 0 40px" }}>
-              Prawie trzydzieści lat kolekcjonowania. Teraz po raz pierwszy dostępne —
+              Trzydzieści lat kolekcjonowania. Teraz po raz pierwszy dostępne —
               dla każdego, kto wie, czego szuka, i dla tych, którzy dopiero zaczynają.
             </p>
             <div className="btn-row" style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>

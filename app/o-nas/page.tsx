@@ -64,7 +64,7 @@ function AboutIntro() {
               margin: "32px 0 0",
             }}
           >
-            Przez prawie 30 lat Arek, współzałożyciel Army Shop Bielsko-Biała,
+            Przez 30 lat Arek, współzałożyciel Army Shop Bielsko-Biała,
             zaopatrywał kolekcjonerów, fachowców, survivalowców i wojskowych.
             Jednocześnie sam stał się kolekcjonerem — i po trzech dekadach
             postanowił otworzyć magazyn dla każdego.
