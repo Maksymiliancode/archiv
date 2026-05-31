@@ -619,10 +619,11 @@ body { overflow-x: hidden; }
   .av-wrap    { padding: 0 16px; }
   .av-section { padding: 48px 0; }
 
-  /* Licznik — 2×2 grid */
-  .av-count { gap: 10px; }
-  .av-count-block { flex-basis: calc(50% - 5px); min-width: 0; padding: 16px 8px 12px; }
-  .av-count-num { font-size: clamp(38px, 11vw, 60px); }
+  /* Licznik — zawsze 1×4 (nie zawija się) */
+  .av-count { gap: 6px; flex-wrap: nowrap; }
+  .av-count-block { min-width: 0; padding: 12px 4px 10px; }
+  .av-count-num { font-size: clamp(28px, 9vw, 52px); }
+  .av-count-lab { font-size: 9px; letter-spacing: 0.22em; margin-top: 8px; }
 
   /* Przyciski mniejsze */
   .av-btn { padding: 14px 18px; font-size: 12px; letter-spacing: 0.12em; }
