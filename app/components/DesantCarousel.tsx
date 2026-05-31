@@ -38,8 +38,11 @@ export function DesantCarousel({ offers, allegroUrl }: { offers: AllegroOffer[];
           textAlign: "left",
         }}
       >
-        <div className="av-stamp" style={{ fontSize: 13, transform: "rotate(-2deg)" }}>
-          SKRZYNIA {crateNum}/30
+        <div className="av-stamp" style={{
+            fontSize: 13, transform: "rotate(-2deg)",
+            ...(crateNum === 0 && { borderColor: "var(--gold)", color: "var(--gold)" }),
+          }}>
+          {crateNum === 0 ? "EARLY ACCESS 0/30" : `SKRZYNIA ${crateNum}/30`}
         </div>
         <div style={{ display: "flex", gap: 6 }}>
           <button
@@ -166,8 +169,8 @@ export function DesantCarousel({ offers, allegroUrl }: { offers: AllegroOffer[];
               )}
             </div>
             <div className="av-card-body">
-              <div className="av-card-sig" style={{ color: "var(--rust)" }}>
-                SKRZYNIA {offer.desantCrate}/30
+              <div className="av-card-sig" style={{ color: crateNum === 0 ? "var(--gold)" : "var(--rust)" }}>
+                {crateNum === 0 ? `EARLY ACCESS ${offer.desantCrate}/30` : `SKRZYNIA ${offer.desantCrate}/30`}
               </div>
               <div className="av-card-title">{offer.title}</div>
               <div className="av-card-meta">

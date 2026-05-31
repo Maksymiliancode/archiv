@@ -1,21 +1,9 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { config } from "@/config/archiv"
 
-function nextDesantDate(): Date {
-  const now = new Date()
-  const first = new Date(config.firstDesant.date)
-  if (now < first) return first
-  const d = new Date(now.getFullYear(), now.getMonth(), config.regularDesantDay, 0, 0, 0)
-  if (d <= now) {
-    return new Date(now.getFullYear(), now.getMonth() + 1, config.regularDesantDay, 0, 0, 0)
-  }
-  return d
-}
-
-function calcTime() {
-  const diff = Math.max(0, nextDesantDate().getTime() - Date.now())
+function calcTime(targetDate: string) {
+  const diff = Math.max(0, new Date(targetDate).getTime() - Date.now())
   const s = Math.floor(diff / 1000)
   return {
     d: Math.floor(s / 86400),
@@ -25,24 +13,63 @@ function calcTime() {
   }
 }
 
-export function Countdown() {
+interface CountdownProps {
+  targetDate: string   // ISO string
+  size?:      "large" | "small"
+  label?:     string   // opcjonalny napis nad licznikiem
+}
+
+export function Countdown({ targetDate, size = "large", label }: CountdownProps) {
   const [t, setT] = useState<ReturnType<typeof calcTime> | null>(null)
-  const [isFirst, setIsFirst] = useState(true)
 
   useEffect(() => {
-    setT(calcTime())
-    setIsFirst(new Date() < new Date(config.firstDesant.date))
-    const id = setInterval(() => setT(calcTime()), 1000)
+    setT(calcTime(targetDate))
+    const id = setInterval(() => setT(calcTime(targetDate)), 1000)
     return () => clearInterval(id)
-  }, [])
+  }, [targetDate])
 
   const pad = (n: number) => String(n).padStart(2, "0")
   const blocks: [string, string][] = t
     ? [[String(t.d), "DNI"], [pad(t.h), "GODZ"], [pad(t.m), "MIN"], [pad(t.s), "SEK"]]
-    : [["--", "DNI"], ["--", "GODZ"], ["--", "MIN"], ["--", "SEK"]]
+    : [["--", "DNI"],        ["--", "GODZ"],      ["--", "MIN"],     ["--", "SEK"]]
+
+  if (size === "small") {
+    return (
+      <div style={{ textAlign: "center" }}>
+        {label && (
+          <div style={{
+            fontFamily: "var(--f-stamp)", fontSize: 10,
+            letterSpacing: "0.34em", color: "var(--faded)", marginBottom: 10,
+          }}>
+            {label}
+          </div>
+        )}
+        <div style={{ display: "flex", gap: 8, justifyContent: "center" }}>
+          {blocks.map(([n, l]) => (
+            <div key={l} style={{
+              textAlign: "center", padding: "10px 14px 8px",
+              background: "rgba(28,26,20,0.04)", border: "1px solid rgba(139,58,42,0.2)",
+              minWidth: 58,
+            }}>
+              <div style={{ fontFamily: "var(--f-stamp)", fontSize: 22, color: "rgba(139,58,42,0.6)", lineHeight: 1 }}>{n}</div>
+              <div style={{ fontFamily: "var(--f-stamp)", fontSize: 9, letterSpacing: "0.28em", color: "rgba(138,127,107,0.6)", marginTop: 5 }}>{l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
-    <>
+    <div style={{ textAlign: "center" }}>
+      {label && (
+        <div style={{
+          fontFamily: "var(--f-stamp)", fontSize: 11,
+          letterSpacing: "0.34em", color: "var(--faded)", marginBottom: 18,
+        }}>
+          {label}
+        </div>
+      )}
       <div className="av-count" style={{ maxWidth: 760, margin: "0 auto" }}>
         {blocks.map(([n, l]) => (
           <div className="av-count-block av-crate" key={l}>
@@ -51,22 +78,6 @@ export function Countdown() {
           </div>
         ))}
       </div>
-
-      <p
-        style={{
-          fontFamily: "var(--f-quote)",
-          fontStyle: "italic",
-          fontSize: 22,
-          lineHeight: 1.6,
-          color: "#4a4332",
-          maxWidth: 660,
-          margin: "44px auto 38px",
-        }}
-      >
-        {isFirst
-          ? "1 września 2026 pierwsze przedmioty z kolekcji lądują na Allegro. Militaria, noże, demobil, sprzęt survivalowy. Żaden przedmiot nie wraca drugi raz."
-          : "Każdego 7. dnia miesiąca nowa partia z kolekcji ląduje na Allegro. Militaria, noże, demobil, sprzęt survivalowy. Każdy znajdzie coś dla siebie — ale żaden przedmiot nie wraca drugi raz."}
-      </p>
-    </>
+    </div>
   )
 }

@@ -35,6 +35,28 @@
 }
 
 /* ============================================================
+   SCROLLBAR — ukryty globalnie (strona z ciemną estetyką)
+   ============================================================ */
+html {
+  scrollbar-width: none;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+
+/* ============================================================
+   ANIMACJE
+   ============================================================ */
+@keyframes tl-ring-pulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 0;   transform: scale(1.14); }
+}
+@keyframes tl-mystery-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ============================================================
    GRAIN — tekstura ziarna (SVG noise)
    ============================================================ */
 .av-grain { position: relative; }
