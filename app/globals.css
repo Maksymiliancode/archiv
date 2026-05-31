@@ -422,8 +422,8 @@ body  { padding-top: var(--nav-h); }
 }
 .av-card-meta {
   display: flex;
-  justify-content: space-between;
-  align-items: baseline;
+  flex-direction: column;
+  gap: 4px;
   border-top: 1px dotted rgba(184,151,90,0.25);
   padding-top: 12px;
 }
