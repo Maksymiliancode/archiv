@@ -30,6 +30,7 @@ export function DesantCarousel({ offers, allegroUrl }: { offers: AllegroOffer[];
 
       {/* Nagłówek + strzałki */}
       <div
+        className="av-dsc-hdr"
         style={{
           display: "flex",
           justifyContent: "space-between",
