@@ -65,9 +65,10 @@ function AboutIntro() {
               margin: "32px 0 0",
             }}
           >
-            Ponad trzydzieści lat na targach Europy i Stanów — zbieranie
-            rzeczy, których nie znajdziesz nigdzie indziej. ARCHIV powstał
-            po to, żeby dostęp do tych przedmiotów miał każdy kolekcjoner —
+            Za ARCHIV stoi Arek — kolekcjoner z ponad trzydziestoletnim
+            stażem na targach Europy i Stanów. Przez te lata zbierał rzeczy,
+            których nie znajdziesz nigdzie indziej. ARCHIV powstał po to,
+            żeby dostęp do tych przedmiotów miał każdy kolekcjoner —
             nie tylko ten z czasem i busem do Niemiec.
           </p>
         </div>
@@ -125,12 +126,12 @@ const TIMELINE = [
   {
     year: "1997",
     head: "FILIP · ZAPALNIK",
-    body: "Filip przyszedł na świat — Arek wziął się za swoje. Army Shop Bielsko ruszył. Klienci szybko poczuli, że ten za ladą wie dlaczego kurtka lotnicza z 1968 jest warta trzy razy więcej od repliki.",
+    body: "Filip — pierworodny syn — przyszedł na świat i Arek wziął się za swoje. Army Shop Bielsko ruszył. Klienci szybko poczuli, że ten za ladą wie dlaczego kurtka lotnicza z 1968 jest warta trzy razy więcej od repliki.",
   },
   {
     year: "1997–2026",
     head: "EUROPA · STANY · TEREN",
-    body: "Europejski obwód: Ciney w Belgii, pchle targi pod Berlinem, Houten, Praga — każde targowisko ze swoimi stałymi bywalcami i ukrytymi skarbami. Osobna historia to kontenery ze Stanów: sprzęt z Wietnamu, Korei, Iranu — inne źródła, inne rozmowy, inna skala. Setki kilometrów busem, kartony na parkingach o świcie, transakcje udane i nieudane. Nauka odróżniania oryginału od kopii — na własnej skórze, nie z podręcznika. Biznes i rodzina rzadko szły w pełni osobno — ale z tego też były korzyści: Haribo z Niemiec, gadżety niedostępne w Polsce i pierwszy porządny rower dla Maksa — zamówiony przez eBay, ku jego wielkiej radości. Przez trzy dekady Arek odkładał to, co było zbyt dobre na sprzedaż. Tak rosło archiwum.",
+    body: "Europejski obwód: Ciney w Belgii, pchle targi pod Berlinem, Houten, Praga — każde targowisko ze swoimi stałymi bywalcami i ukrytymi skarbami. Osobna historia to kontenery ze Stanów: sprzęt z Wietnamu, Korei, Iranu — inne źródła, inne rozmowy, inna skala. Setki kilometrów busem, kartony na parkingach o świcie, transakcje udane i nieudane. Nauka odróżniania oryginału od kopii — na własnej skórze, nie z podręcznika. Jak wiadomo ciężko oddzielić taki biznes od rodziny — ale nie ma tego złego... Haribo z Niemiec i inne gadżety niedostępne w Polsce zawsze smakowały lepiej. Dawały radę. Przez trzy dekady Arek odkładał to, co było zbyt dobre na sprzedaż. Tak rosło archiwum.",
   },
   {
     year: "2022",
