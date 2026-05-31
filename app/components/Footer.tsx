@@ -16,7 +16,7 @@ export function Footer() {
         >
           {/* ── BRAND ── */}
           <div>
-            <div className="av-nav-logo" style={{ marginBottom: 20 }}>
+            <div className="av-nav-logo" style={{ marginBottom: 20, paddingTop: 6 }}>
               <b style={{ fontSize: 22 }}>ARCHIV</b>
               <span>BIELSKO-BIAŁA — OD 1997</span>
             </div>
