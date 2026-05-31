@@ -148,6 +148,23 @@ export function Opinie() {
           </div>
         ))}
       </div>
+
+      <div className="av-wrap" style={{ position: "relative", zIndex: 2, marginTop: 52, textAlign: "center" }}>
+        <p style={{
+          fontFamily: "var(--f-quote)",
+          fontStyle: "italic",
+          fontSize: 20,
+          color: "var(--faded)",
+          marginBottom: 24,
+          lineHeight: 1.6,
+        }}>
+          Poznaj swoich towarzyszy. Prawie 30 lat za ladą.
+        </p>
+        <a href="/o-nas" className="av-btn av-btn-ghost">
+          DOWIEDZ SIĘ WIĘCEJ O NAS →
+        </a>
+      </div>
+
     </section>
   )
 }
