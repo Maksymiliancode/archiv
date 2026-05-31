@@ -140,7 +140,7 @@ const TIMELINE = [
   {
     year: "2026",
     head: "MAKS · ARCHIV",
-    body: "Trzydzieści lat działalności — sklep spełniony w 100%: klienci, towar, jakość obsługi. Jedno tylko nigdy nie wyszło, a zawsze tkwiło z tyłu głowy: własna strona internetowa. Trzy dekady w branży to jednak idealny moment na zmianę — i tu pojawia się zapalnik numer dwa. Maks i Arek wspólnie wymyślają ARCHIV — nowy rozdział: nie zwykły sklep online, ale platforma działająca jak najlepsze stoisko na targu. Co miesiąc coś nowego, otwarta dla kolekcjonerów z całego świata — bez wychodzenia z domu.",
+    body: "Trzydzieści lat działalności — sklep spełniony w 100%: klienci, towar, jakość obsługi. Jedno tylko nigdy nie wyszło, a zawsze tkwiło z tyłu głowy: własna strona internetowa. Trzy dekady w branży to jednak idealny moment na zmianę — i tu pojawia się zapalnik numer dwa. Maks — młodszy syn — i Arek wspólnie wymyślają ARCHIV — nowy rozdział: nie zwykły sklep online, ale platforma działająca jak najlepsze stoisko na targu. Co miesiąc coś nowego, otwarta dla kolekcjonerów z całego świata — bez wychodzenia z domu.",
   },
 ]
 
