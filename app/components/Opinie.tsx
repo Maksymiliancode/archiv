@@ -21,23 +21,19 @@ const REVIEWS = [
   { author: "Dawid J.",   date: "6 miesięcy temu",   text: "Bardzo profesjonalni i sympatyczni panowie z obsługi, a sklep? Zatrzęsienie rzeczy z demobilu amerykańskiego, brytyjskiego, holenderskiego, niemieckiego i innych." },
 ]
 
-// lekki przechył każdej kartki — cykl żeby nie powtarzał się wzorzec
-const TILTS = ["-1.1deg", "0.8deg", "0deg", "-0.7deg", "1.3deg", "0.4deg", "-0.5deg", "1deg"]
-
-const SPEED   = 0.35          // px/frame ≈ 21 px/s przy 60 fps
-const CARD_W  = 320           // szerokość karty
-const GAP     = 28
-const STEP    = CARD_W + GAP  // 348 px
+const TILTS    = ["-1.1deg", "0.8deg", "0deg", "-0.7deg", "1.3deg", "0.4deg", "-0.5deg", "1deg"]
+const SPEED    = 0.35
+const CARD_W   = 320
+const GAP      = 28
+const STEP     = CARD_W + GAP
 
 export function Opinie() {
   const trackRef       = useRef<HTMLDivElement>(null)
-  const dragAreaRef    = useRef<HTMLDivElement>(null)
-  const offsetRef      = useRef(0)
-  const pausedRef      = useRef(false)
   const rafRef         = useRef<number>(0)
-  const isDraggingRef  = useRef(false)
-  const dragStartXRef  = useRef(0)
-  const dragStartOff   = useRef(0)
+  const autoOffRef     = useRef(0)       // akumuluje ułamkowe piksele
+  const pausedRef      = useRef(false)
+  const isAutoRef      = useRef(false)   // czy scroll pochodzi od auto-scroll
+  const resumeRef      = useRef<ReturnType<typeof setTimeout>>(undefined)
 
   const doubled   = [...REVIEWS, ...REVIEWS]
   const halfWidth = REVIEWS.length * STEP
@@ -48,45 +44,48 @@ export function Opinie() {
 
     const tick = () => {
       if (!pausedRef.current) {
-        offsetRef.current += SPEED
-        if (offsetRef.current >= halfWidth) offsetRef.current -= halfWidth
-        track.style.transform = `translateX(-${offsetRef.current}px)`
+        autoOffRef.current += SPEED
+        if (autoOffRef.current >= halfWidth) autoOffRef.current -= halfWidth
+        isAutoRef.current = true
+        track.scrollLeft = autoOffRef.current
+        isAutoRef.current = false
       }
       rafRef.current = requestAnimationFrame(tick)
     }
 
+    // Natywny listener żeby sprawdzać flagę synchronicznie
+    const onScroll = () => {
+      if (isAutoRef.current) return
+      // Użytkownik scrolluje — pauzuj i synchronizuj pozycję
+      pausedRef.current = true
+      autoOffRef.current = track.scrollLeft
+      // Bezszwowa pętla w przód
+      if (track.scrollLeft >= halfWidth) {
+        track.scrollLeft -= halfWidth
+        autoOffRef.current = track.scrollLeft
+      }
+      clearTimeout(resumeRef.current)
+      resumeRef.current = setTimeout(() => { pausedRef.current = false }, 2000)
+    }
+
+    track.addEventListener("scroll", onScroll, { passive: true })
     rafRef.current = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(rafRef.current)
+
+    return () => {
+      cancelAnimationFrame(rafRef.current)
+      clearTimeout(resumeRef.current)
+      track.removeEventListener("scroll", onScroll)
+    }
   }, [halfWidth])
 
   const jump = (dir: 1 | -1) => {
-    offsetRef.current = ((offsetRef.current + dir * STEP) % halfWidth + halfWidth) % halfWidth
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`
-    }
-  }
-
-  const onMouseDown = (e: React.MouseEvent) => {
-    isDraggingRef.current = true
-    dragStartXRef.current = e.clientX
-    dragStartOff.current  = offsetRef.current
-    pausedRef.current     = true
-    if (dragAreaRef.current) dragAreaRef.current.style.cursor = "grabbing"
-  }
-
-  const onMouseMove = (e: React.MouseEvent) => {
-    if (!isDraggingRef.current) return
-    const delta = dragStartXRef.current - e.clientX
-    offsetRef.current = ((dragStartOff.current + delta) % halfWidth + halfWidth) % halfWidth
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(-${offsetRef.current}px)`
-    }
-  }
-
-  const onMouseUp = () => {
-    isDraggingRef.current = false
-    pausedRef.current     = false
-    if (dragAreaRef.current) dragAreaRef.current.style.cursor = "grab"
+    const track = trackRef.current
+    if (!track) return
+    const next = ((track.scrollLeft + dir * STEP) % halfWidth + halfWidth) % halfWidth
+    autoOffRef.current = next
+    isAutoRef.current = true
+    track.scrollLeft = next
+    isAutoRef.current = false
   }
 
   return (
@@ -94,7 +93,8 @@ export function Opinie() {
       className="av-section av-section-dark av-grain av-grain-dark"
       style={{ paddingBottom: 90, overflow: "hidden" }}
     >
-      {/* nagłówek wewnątrz wrapa */}
+      <style>{`.av-opinie::-webkit-scrollbar{display:none}`}</style>
+
       <div className="av-wrap av-fade" style={{ position: "relative", zIndex: 2, marginBottom: 48 }}>
         <div className="av-eyebrow" style={{ color: "var(--gold)" }}>ZAPISKI Z DZIENNIKA · GOOGLE MAPS ★★★★★</div>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", flexWrap: "wrap", gap: 16 }}>
@@ -116,43 +116,36 @@ export function Opinie() {
         </div>
       </div>
 
-      {/* track — wychodzi poza wrap żeby krawędziowo się ucinał */}
       <div
-        ref={dragAreaRef}
-        style={{ paddingBottom: 18, cursor: "grab" }}
-        onMouseDown={onMouseDown}
-        onMouseMove={onMouseMove}
-        onMouseUp={onMouseUp}
-        onMouseLeave={onMouseUp}
+        ref={trackRef}
+        className="av-opinie"
+        onMouseEnter={() => { pausedRef.current = true }}
+        onMouseLeave={() => { pausedRef.current = false; clearTimeout(resumeRef.current) }}
+        style={{
+          display: "flex",
+          gap: GAP,
+          overflowX: "scroll",
+          scrollbarWidth: "none",
+          paddingLeft: 56,
+          paddingBottom: 18,
+        } as React.CSSProperties}
       >
-        <div
-          ref={trackRef}
-          style={{
-            display: "flex",
-            gap: GAP,
-            width: "max-content",
-            paddingLeft: 56,
-            paddingBottom: 18,
-            willChange: "transform",
-            userSelect: "none",
-          }}
-        >
-          {doubled.map((r, i) => (
-            <div
-              key={i}
-              className="av-review av-crate"
-              style={{
-                width: CARD_W,
-                flexShrink: 0,
-                transform: `rotate(${TILTS[i % TILTS.length]})`,
-              }}
-            >
-              <div className="av-review-stars">★★★★★</div>
-              <p className="av-review-q">„{r.text}"</p>
-              <div className="av-review-by">{r.author} · {r.date} · Google Maps</div>
-            </div>
-          ))}
-        </div>
+        {doubled.map((r, i) => (
+          <div
+            key={i}
+            className="av-review av-crate"
+            style={{
+              width: CARD_W,
+              flexShrink: 0,
+              transform: `rotate(${TILTS[i % TILTS.length]})`,
+              userSelect: "none",
+            }}
+          >
+            <div className="av-review-stars">★★★★★</div>
+            <p className="av-review-q">„{r.text}"</p>
+            <div className="av-review-by">{r.author} · {r.date} · Google Maps</div>
+          </div>
+        ))}
       </div>
     </section>
   )
