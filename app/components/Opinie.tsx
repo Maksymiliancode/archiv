@@ -63,9 +63,7 @@ export function Opinie() {
     if (!track) return
     const next = ((track.scrollLeft + dir * STEP) % halfWidth + halfWidth) % halfWidth
     autoOffRef.current = next
-    isAutoRef.current = true
     track.scrollLeft = next
-    isAutoRef.current = false
   }
 
   return (
