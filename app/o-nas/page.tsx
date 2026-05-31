@@ -51,8 +51,8 @@ function AboutIntro() {
             className="av-sechead"
             style={{ fontSize: "clamp(46px,7vw,92px)", lineHeight: 0.92 }}
           >
-            TRZYDZIEŚCI<br />LAT W TERENIE.<br />
-            <span style={{ color: "var(--rust)" }}>2026: ARCHIV.</span>
+            PASJA.<br />WIEDZA.<br />
+            <span style={{ color: "var(--rust)" }}>ARCHIV.</span>
           </h1>
           <p
             style={{
@@ -65,10 +65,10 @@ function AboutIntro() {
               margin: "32px 0 0",
             }}
           >
-            Arek od prawie trzydziestu lat jeździ po targach Europy i Stanów
+            Arek od ponad trzydziestu lat jeździ po targach Europy i Stanów
             w poszukiwaniu rzeczy, których nigdzie indziej nie ma — Ciney,
             pchle targi pod Hamburgiem, Houten, Praga, sutereny i magazyny
-            od Atlantyku po Pacyfik. Archiv to ta wiedza i pasja,
+            od Atlantyku po Pacyfik. ARCHIV to ta wiedza i pasja,
             dostępna dla każdego.
           </p>
         </div>
@@ -126,17 +126,17 @@ const TIMELINE = [
   {
     year: "1997",
     head: "FILIP · ZAPALNIK",
-    body: "Gdy na świat przyszedł Filip, decyzja była prosta: własny biznes. Sklep ruszył. Klienci szybko poczuli, że Arek wie co sprzedaje i dlaczego to warte swojej ceny. To zostało.",
+    body: "Gdy Arek trzymał w rękach nowo narodzonego Filipa — swojego pierworodnego syna — wiedział jedno: czas wziąć się za swoje. Sklep ruszył jeszcze tego samego roku. Szybko okazało się, że klienci potrafią wyczuć różnicę: ten, kto stoi za ladą, zbiera militaria odkąd pamięta. Wiedział, dlaczego kurtka lotnicza z 1968 roku jest warta trzy razy więcej od nowej repliki — i nie musiał tego tłumaczyć.",
   },
   {
     year: "1997–2026",
     head: "EUROPA · STANY · TEREN",
-    body: "Ciney w Belgii, pchle targi pod Berlinem, Houten, Praga — i kontenery ze Stanów: sprzęt z Wietnamu, z Korei, z drugiej wojny, z Iranu. Do tego zloty jak Operacja Południe czy D-Day Hel — miejsca, gdzie rosły przyjaźnie i znajomości, które działają do dziś. Przez prawie trzy dekady Arek kupował mądrze i odkładał to, czego nie chciał od razu sprzedawać. Tak rosło archiwum.",
+    body: "Ciney w Belgii o poranku — kilka hal, tysiące stoisk, Arek jak w domu. Pchle targi pod Berlinem o szóstej rano, kiedy większość sprzedawców jeszcze śpi — właśnie wtedy trafiają się rzeczy, których nie ma na żadnym zdjęciu w internecie. Houten, Praga, zloty jak Operacja Południe i D-Day Hel. Kontenery ze Stanów: Wietnam, Korea, druga wojna, Iran. Sklep rósł razem z ludźmi — Tadziu czyli Borsuk: twarz sklepu i nieodłączny element wyposażenia; Axel: chodzące kompendium wiedzy wojskowej i bezużytecznej, co do joty; Paweł: jedyny prawdziwy IT guy w ekipie, który ogarnął Allegro, bo starsi nie bardzo potrafili. Przez te trzy dekady Arek zbierał najlepsze egzemplarze i chował głębiej niż inne towary. Wiedział, że kiedyś przyjdzie na nie czas.",
   },
   {
     year: "2026",
     head: "MAKS · ARCHIV",
-    body: "Drugi syn, Maks, buduje platformę. Archiv startuje. Kolekcja po raz pierwszy trafia do ludzi — nie jako kolejny sklep ze stałą ofertą, ale jako comiesięczny desant z najlepszego, co świat ma do zaoferowania.",
+    body: "Drugi syn Maks pewnego dnia pokazał Arekowi, co można zrobić z tym wszystkim online. Efekt: ARCHIV. Nie wyprzedaż, nie likwidacja — zwieńczenie. Platforma, która daje każdemu kolekcjonerowi — nawet temu, który nie ma czasu jeździć po Europie — dostęp do dokładnie tych przedmiotów, które Arek latami odkładał dla siebie. Co miesiąc nowa skrzynia. Raz ląduje, raz znika. Jak na targu — tylko bez wstawania o szóstej rano pod Hamburgiem.",
   },
 ]
 
@@ -311,7 +311,7 @@ const HOW = [
   {
     nr: "03",
     head: "PODSTAWY",
-    body: "Dwie rzeczy, na których stoi ARCHIV. Pierwsza: wiedza — za każdym przedmiotem stoi ktoś, kto zna go z historii i z ręki, doradzi, opowie, sprawdzi autentyczność. Bo Archiv to lata w terenie, nie katalog z magazynu. Druga: stała oferta na Allegro — ci, którzy ją znają, wiedzą, że sama w sobie była już dość wyszukana i specyficzna. To nie przypadkowy asortyment.",
+    body: "Dwie rzeczy, na których stoi ARCHIV. Pierwsza: wiedza — za każdym przedmiotem stoi ktoś, kto zna go z historii i z ręki, doradzi, opowie, sprawdzi autentyczność. Bo ARCHIV to lata w terenie, nie katalog z magazynu. Druga: stała oferta na Allegro — ci, którzy ją znają, wiedzą, że sama w sobie była już dość wyszukana i specyficzna. To nie przypadkowy asortyment.",
   },
 ]
 
@@ -391,14 +391,14 @@ function Acknowledgments() {
             maxWidth: 660,
           }}
         >
-          Archiv nie powstałby bez ludzi.<br /><br />
+          ARCHIV nie powstałby bez ludzi.<br /><br />
           Bez Moniki — która była na targach równie często co Arek
           i handlowała równie dobrze. Bez Filipa, który — sam o tym nie wiedząc —
           zapoczątkował całą tę historię. Bez Maksa, który zamienił pasję w platformę.<br /><br />
           Bez Wojtka — partnera w drodze. Bez pracowników, którzy przez lata trzymali fort.
           Bez kontrahentów z całej Europy i świata — za każdą transakcję i każdą wskazówkę.<br /><br />
           Przede wszystkim — bez klientów, którzy zaufali i wrócili.
-          Bez Was Archiv nie ma sensu.
+          Bez Was ARCHIV nie ma sensu.
         </p>
       </div>
     </section>

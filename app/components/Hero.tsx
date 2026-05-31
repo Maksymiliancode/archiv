@@ -42,7 +42,7 @@ export function Hero({ currentCrate }: { currentCrate: number | null }) {
             <p style={{ fontFamily: "var(--f-quote)", fontStyle: "italic", fontSize: "clamp(19px,2vw,24px)", lineHeight: 1.55, color: "var(--gold)", maxWidth: 560, margin: "34px 0 40px" }}>
               Trzydzieści lat zbierania unikatowych przedmiotów z całego świata.
               ARCHIV to najciekawsze stoisko na targu wojskowym — przeniesione online,
-              otwarte dla każdego, co miesiąc nowa skrzynia z kolekcji.
+              otwarte dla każdego. Co miesiąc nowa skrzynia z kolekcji.
             </p>
             <div className="btn-row" style={{ display: "flex", gap: 18, flexWrap: "wrap" }}>
               <a className="av-btn av-btn-rust" href="#desant">
