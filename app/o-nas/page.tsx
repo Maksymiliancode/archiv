@@ -65,11 +65,10 @@ function AboutIntro() {
               margin: "32px 0 0",
             }}
           >
-            Arek od ponad trzydziestu lat jeździ po targach Europy i Stanów
-            w poszukiwaniu rzeczy, których nigdzie indziej nie ma — Ciney,
-            pchle targi pod Hamburgiem, Houten, Praga, sutereny i magazyny
-            od Atlantyku po Pacyfik. ARCHIV to ta wiedza i pasja,
-            dostępna dla każdego.
+            Ponad trzydzieści lat na targach Europy i Stanów — zbieranie
+            rzeczy, których nie znajdziesz nigdzie indziej. ARCHIV powstał
+            po to, żeby dostęp do tych przedmiotów miał każdy kolekcjoner —
+            nie tylko ten z czasem i busem do Niemiec.
           </p>
         </div>
 
@@ -126,22 +125,22 @@ const TIMELINE = [
   {
     year: "1997",
     head: "FILIP · ZAPALNIK",
-    body: "Gdy Arek trzymał w rękach nowo narodzonego Filipa — swojego pierworodnego syna — wiedział jedno: czas wziąć się za swoje. Sklep ruszył jeszcze tego samego roku. Szybko okazało się, że klienci potrafią wyczuć różnicę: ten, kto stoi za ladą, zbiera militaria odkąd pamięta. Wiedział, dlaczego kurtka lotnicza z 1968 roku jest warta trzy razy więcej od nowej repliki — i nie musiał tego tłumaczyć.",
+    body: "Filip przyszedł na świat — Arek wziął się za swoje. Sklep ruszył. Klienci szybko poczuli, że ten za ladą wie dlaczego kurtka lotnicza z 1968 jest warta trzy razy więcej od repliki.",
   },
   {
     year: "1997–2026",
     head: "EUROPA · STANY · TEREN",
-    body: "Ciney w Belgii o poranku — kilka hal, tysiące stoisk, Arek jak w domu. Pchle targi pod Berlinem o szóstej rano, kiedy większość sprzedawców jeszcze śpi — właśnie wtedy trafiają się rzeczy, których nie ma na żadnym zdjęciu w internecie. Houten, Praga, zloty jak Operacja Południe i D-Day Hel. Kontenery ze Stanów: Wietnam, Korea, druga wojna, Iran. Setki kilometrów busem w każdą stronę, przerzucane kartony na parkingach o świcie, transakcje udane i takie mniej. Nauczony odróżniać oryginał od kopii — to lekcja, której nie ma w żadnym podręczniku. Na oddzielanie biznesu od rodziny nie było za wiele czasu — ale były plusy: Haribo z Niemiec, gadżety których w Polsce jeszcze nie było, i pierwszy porządny rower w domu oczywiście stamtąd — i nie tak jak myślicie, normalnie przez eBay. Sklep rósł razem z ludźmi — Tadziu czyli Borsuk: twarz sklepu i nieodłączny element wyposażenia; Axel: chodzące kompendium wiedzy wojskowej i bezużytecznej, co do joty; Paweł: jedyny prawdziwy IT guy w ekipie, który ogarnął Allegro, bo starsi nie bardzo potrafili. Przez te trzy dekady Arek zbierał najlepsze egzemplarze i chował głębiej niż inne towary. Wiedział, że kiedyś przyjdzie na nie czas.",
+    body: "Ciney, Berlin, Houten, Praga — kontenery ze Stanów: Wietnam, Korea, Iran. Setki kilometrów busem, kartony na parkingach o świcie, transakcje udane i nieudane. Nauka odróżniania oryginału od kopii — na własnej skórze, nie z podręcznika. Na marginesie: Haribo z Niemiec, gadżety niedostępne w Polsce i pierwszy porządny rower — normalnie przez eBay, wbrew temu co myślicie. Przez trzy dekady Arek odkładał to, co było zbyt dobre na sprzedaż. Tak rosło archiwum.",
   },
   {
     year: "2022",
     head: "UKRAINA · WOLONTARIAT",
-    body: "Wybuch pełnoskalowej inwazji przyniósł zupełnie inny rodzaj wyzwania. Fundacje, organizacje i wolontariusze nagle szukali kogoś, kto wie jak kupić dobry sprzęt — nie podróbkę, nie towar przeszacowany przez trzech pośredników. Arek działał wtedy przede wszystkim charytatywnie: dzielił się wiedzą, pomagał organizować zaopatrzenie, był prawdziwym łącznikiem między chętnymi do pomocy a sprawdzonymi dostawcami jakościowego wyposażenia. Nieprzespane noce, nowe znajomości z całego kraju i Europy, zamówienia innej skali niż dotychczas. Trudny czas — ale też dowód na to, że trzydzieści lat w terenie to coś znacznie więcej niż pasja.",
+    body: "Wybuch inwazji zmienił wszystko. Fundacje szukały kogoś, kto wie jak kupić dobry sprzęt — nie podróbkę, nie przez trzech pośredników. Arek działał charytatywnie: łączył potrzebujących z prawdziwymi dostawcami, dzielił się wiedzą. Nieprzespane noce i znajomości na całą Europę. Trudny czas — i dowód na to, że lata w terenie to coś więcej niż pasja.",
   },
   {
     year: "2026",
     head: "MAKS · ARCHIV",
-    body: "Drugi syn Maks pewnego dnia pokazał Arekowi, co można zrobić z tym wszystkim online. Efekt: ARCHIV. Nie wyprzedaż, nie likwidacja — zwieńczenie. Platforma, która daje każdemu kolekcjonerowi — nawet temu, który nie ma czasu jeździć po Europie — dostęp do dokładnie tych przedmiotów, które Arek latami odkładał dla siebie. Co miesiąc nowa skrzynia. Raz ląduje, raz znika. Jak na targu — tylko bez wstawania o szóstej rano pod Hamburgiem.",
+    body: "Maks pokazał ojcu, co można zrobić z tym wszystkim online. Efekt: ARCHIV. Nie wyprzedaż, nie likwidacja — zwieńczenie. Co miesiąc nowa skrzynia. Jak na targu — tylko bez wstawania o szóstej rano pod Hamburgiem.",
   },
 ]
 
@@ -291,8 +290,8 @@ function Idea() {
                 margin: 0,
               }}
             >
-              „Przez trzydzieści lat wiedziałem, że te rzeczy zasługują
-              na lepszy dom. Teraz go mają."
+              „Zawsze wiedziałem, że te rzeczy zasługują na lepszy dom.
+              Teraz mają szansę go znaleźć."
             </p>
           </div>
         </div>
