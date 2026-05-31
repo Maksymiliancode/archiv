@@ -1,3 +1,4 @@
+import { connection } from "next/server"
 import { getActiveOffers, getEndedDesantOffers } from "@/lib/allegro"
 import { Countdown } from "./Countdown"
 import { DesantCarousel } from "./DesantCarousel"
@@ -11,6 +12,7 @@ import {
 } from "@/lib/desantState"
 
 export async function DesantSection({ allegroUrl }: { allegroUrl: string }) {
+  await connection()
   const [{ offers: active }, { offers: ended }] = await Promise.all([
     getActiveOffers(),
     getEndedDesantOffers(),
