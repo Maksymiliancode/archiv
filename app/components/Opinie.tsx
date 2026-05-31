@@ -124,7 +124,7 @@ export function Opinie() {
         style={{
           display: "flex",
           gap: GAP,
-          overflowX: "scroll",
+          overflowX: "auto",
           scrollbarWidth: "none",
           paddingLeft: 56,
           paddingBottom: 18,
