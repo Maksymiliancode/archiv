@@ -73,9 +73,9 @@ export async function DesantSection({ allegroUrl }: { allegroUrl: string }) {
                 <DesantCarousel offers={desantOffers} allegroUrl={allegroUrl} />
                 <p style={{
                   marginTop: 20, fontFamily: "var(--f-quote)", fontStyle: "italic",
-                  fontSize: 14, color: "var(--faded)", textAlign: "center", opacity: 0.85,
+                  fontSize: 18, color: "var(--faded)", textAlign: "center", opacity: 0.85,
                 }}>
-                  Skrzynia 0 to specjalna oferta dla pierwszych klientów Archiv.
+                  Ta skrzynia seria 0/30 to specjalna oferta dla pierwszych klientów ARCHIV.
                   Znika gdy pojawi się Desant nr 1 — 1 września 2026.
                 </p>
               </>
